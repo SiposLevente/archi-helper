@@ -3,14 +3,14 @@ Fontosabb assembly utasítások, Dosboxban való programok futtatása.
 
 ## Jelek értelmezése az "ArchiHelper.txt" állományban:
 
-|<center>Jelölés</center>|<center>Mit jelent</center>|<center>Példa:</center>|
+|Jelölés|Mit jelent|Példa:|
 |----|----|----|
-|<center>3 sor '#'</center>|Nagyobb témák elválasztása.|<center>-</center>|
-|<center>1 sor '#'</center>|Egy nagy témát több kisebb alrészre bont.|<center>-</center>|
-|<center>Szöveg/szám '*' között</center>|Gyors elérésm témák száma, neve. Ezekre ha rákeresünk egyből az adott témához ugorhatunk.|<center>\*6.5\* - \*shr\*</center>|
-|<center>Egy sor '.'</center>|Elválasztó jel, 2 ilyen sor között programkód található|<center>-</center>|
-|<center>{SZOVEG}</center>|Behelyettesítendő szöveg|<center>shr {MIT},{MENNYIVEL}</center>|
-|<center>...</center>|Nem lényeges kód sorok, ez akár több sort is reprezentálhat, de nem lényeges a bemutató szempontjából|<center>...</center>|
+|3 sor '#'|Nagyobb témák elválasztása.|-|
+|1 sor '#'|Egy nagy témát több kisebb alrészre bont.|-|
+|Szöveg/szám '*' között|Gyors elérésm témák száma, neve. Ezekre ha rákeresünk egyből az adott témához ugorhatunk.|\*6.5\* - \*shr\*|
+|Egy sor '.'|Elválasztó jel, 2 ilyen sor között programkód található|-|
+|{SZOVEG}|Behelyettesítendő szöveg|shr {MIT},{MENNYIVEL}|
+|...|Nem lényeges kód sorok, ez akár több sort is reprezentálhat, de nem lényeges a bemutató szempontjából|...|
 
 ## Témák gyors elérése:
 ### Használata:
@@ -20,28 +20,28 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     keresés szövege: \*2\* vagy \*program váz\* vagy \*2\* - \*program váz\*
 
 1. exe létrehozása
-2. program váz
-3. karakter kiíratás
-4. szöveg kiíratás
-5. műveletek
+1. program váz
+1. karakter kiíratás
+1. szöveg kiíratás
+1. műveletek
     1. mov
-    2. add
-    3. sub
-    4. cmp
-    5. jmp
-    6. jz
-    7. jnz
-    8. jc
-    9. jnc
-    10. többi jump
-6. bináris műveletek
+    1. add
+    1. sub
+    1. cmp
+    1. jmp
+    1. jz
+    1. jnz
+    1. jc
+    1. jnc
+    1. többi jump
+1. bináris műveletek
     1. and
-    2. or
-    3. xor
-    4. shl
-    5. shr
-    6. rol
-    7. ror
+    1. or
+    1. xor
+    1. shl
+    1. shr
+    1. rol
+    1. ror
 
 ## Dosboxban programok futtatása
 
