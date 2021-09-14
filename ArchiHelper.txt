@@ -184,9 +184,9 @@ jmp:
 		
 		...
 		jmp Fuggveny  --┐
-		...				|
-					|
-					|
+		...		|
+			|
+				|
 	Fuggveny:	<-------┘
 		;{MŰVELETEK}
 
