@@ -279,8 +279,6 @@ VanCarry:
 
 *5.9* - *jnc*
 jnc:
-
-jc:
 	Feltétel ugrás, akkor ugrik ha a "carry" flag 0
 	Pl.:
 	.....................................................
