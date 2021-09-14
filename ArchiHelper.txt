@@ -1,0 +1,465 @@
+#####################################################
+#####################################################
+#####################################################
+
+*1* - *exe létrehozása*
+EXE előállítása (DosBox cmd-ben):
+
+C:\> masm.exe program.asm,,,,
+C:\> link.exe program.obj,,,,
+
+#####################################################
+#####################################################
+#####################################################
+
+*2* - *program váz*
+Alap program váz (utána egy üres sor!!):
+.....................................................
+
+Code	Segment
+	assume CS:Code, DS:Data, SS:Stack
+
+Start:
+	mov	ax, Code
+	mov	DS, AX
+    ;{PROGRAM IDE KERÜL}
+
+Program_Vege:
+	mov ax, 4c00h
+	int 21h
+
+Code	Ends
+
+Data	Segment
+
+Data	Ends
+
+Stack	Segment
+
+Stack	Ends
+	End	Start
+
+.....................................................
+
+#####################################################
+#####################################################
+#####################################################
+
+*3* - *karakter kiíratás*
+Karakter kiíratása:
+
+.....................................................
+
+mov AH, 02
+mov DL, ;{KARAKTER KÓD}
+int 21h
+
+.....................................................
+
+Karakter kódók a következők lehetnek:
+ASCII kódok alapján kell megadni a karaktereket.
+Pl.: '0' karakter megadása:
+'0' karakter kódja 48
+
+1, decimálisan megadva:
+mov DL, 48
+
+2, hexadecimálisan:
+mov DL, 30h
+
+3, binárisan:
+mov DL, 00110000b
+
+4, karakter megadásával:
+mov DL, '0'
+
+
+Karakterek megadása műveletekkel:
+
+Pl. '2' megadása:
+
+.....................................................
+
+mov BL, '0' ;megadjuk a '0'-t mint kezdő karakter
+add BL, 2 ;hozzáadjuk a kívánt számot
+
+mov ah, 02
+mov DL, BL ;2 kerül kiiratásra
+int 21h
+
+.....................................................
+
+#####################################################
+#####################################################
+#####################################################
+
+*4* - *szöveg kiíratás*
+Szöveg kiíratása:
+
+.....................................................
+
+mov dx, offset uzenet
+mov ah, 09
+int 21h
+
+Program_Vége:
+	...
+
+; A "Code	Ends" feletti területen érdemes ezeket a szövegeket deklarálni
+; $ jel kell a szöveg végére, eddig írja ki a program a szöveget
+; pl.: "Ez egy$uzenet" -> 'Ez egy'
+
+uzenet db "Ez egy uzenet!$"
+
+.....................................................
+
+#####################################################
+#####################################################
+#####################################################
+
+*5* - *műveletek*
+Műveletek:
+
+*5.1* - *mov*
+mov:
+	Egyik memória területről a másikba való másolás
+	mov {HOVA}, {MIT}
+
+#####################################################
+
+*5.2* - *add*
+add:
+	Összeadás, olyan mint a '+='
+	add {MIHEZ}, {MIT}
+
+	add BL, 2 -> BL += 2
+
+#####################################################
+
+*5.3* - *sub*
+sub:
+	Kivonás, olyan mint a '-='
+	sub {MIBŐL}, {MIT}
+
+	sub BL, 2 -> BL -= 2
+
+#####################################################
+
+*5.4* - *cmp*
+cmp:
+	Összehasonlítás, igazából kivonás, de a változók értéke nem változik, beállítja a flagaket
+	cmp ax, 5 -> ax - 5
+
+	Flagek:
+		C: Carry - 1-re áll, ha az aritmetikai művelet során átvitel vagy áthozat keletkezik, bitléptető és forgató utasítások során is használatba kerül
+
+		P: Parity - 0 az értéke ha páros, 1 ha páratlan
+
+		Z: Zero - 1 az értéke ha az eredmény 0
+
+		S: Sign - negatív eredmény esetén 1 az értéke
+
+		O: Overflow - egy matematikai művelet eredménye meghaladja a kiszabott tartományt, akkor 1-re áll
+
+	
+	Pl.:
+	[CPZSO -> 00000] (flagek ábrázolása szemléltetésképpen)
+	1,
+		mov ax, 5
+		cmp ax, 5 -> [CPZSO -> 00100]
+
+	2,
+		mov ax, 4
+		cmp ax, 5 -> [CPZSO -> 11011]
+
+#####################################################
+
+*5.5* - *jmp*
+Az ugrás után az a kód a megadott kódrész után folytatódik tovább, nem ugrik vissza autómatikusan!
+
+jmp:
+	Feltétel nélküli ugrás, egy megadott kódrészhez ugrik
+
+	.....................................................
+		
+		...
+		jmp Fuggveny  --┐
+		...				|
+						|
+						|
+	Fuggveny:	<-------┘
+		;{MŰVELETEK}
+
+	.....................................................
+
+	Lehet végtelen ciklust is létrehozni vele:
+	.....................................................
+
+	Ciklus:
+	...
+	;{VALAMI PROGRAM}
+	...
+	jmp Ciklus
+
+	.....................................................
+
+#####################################################
+
+*5.6* - *jz*
+jz:
+	Feltételes ugrás, akkor ugrik ha a "zero" flag 1
+
+	Megfelel az "==" vel
+
+	.....................................................
+
+	mov ax, 5
+	cmp ax, 5
+	jz Egyenlo
+	...
+
+Egyenlo:
+	;{AKKOR FUT LE HA EGYENLŐ}
+
+	.....................................................
+
+	Fenti kódrész kb egyenlő ezzel:
+	.....................................................
+
+	ax = 5
+	if (ax == 5){
+		;{AKKOR FUT LE HA EGYENLŐ}
+	}
+
+	.....................................................
+
+#####################################################
+
+*5.7* - *jnz*
+jnz:
+	Feltételes ugrás, akkor ugrik ha a "zero" flag 0
+
+	Megfelel az "!=" vel
+
+	.....................................................
+
+	mov ax, 6
+	cmp ax, 5
+	jnz NemEgyenlo
+
+	...
+
+NemEgyenlo:
+	;{AKKOR FUT LE HA NEM EGYENLŐ}
+
+	.....................................................
+
+#####################################################
+
+*5.8* - *jc*
+jc:
+	Feltétel ugrás, akkor ugrik ha a "carry" flag 1
+	Pl.:
+
+	.....................................................
+
+	mov ax, 4
+	cmp ax, 5 ;4-5 = -1, mivel az eredmény negatív nem lehet ezért átfordul és 255 lesz, ez triggereli a carry flaget
+	jc VanCarry
+
+	...
+
+VanCarry:
+	;{AKKOR FUT LE HA A "CARRY" FLAG 1}
+	;{EZ AZT IS JELENTI HOGY A 4 KISEBB MINT AZ 5, HA ERRE VAGYUNK KÍVÁNCSIAK ILYEN MÓDON IS LEHET VIZSGÁLNI}
+
+	.....................................................
+
+#####################################################
+
+*5.9* - *jnc*
+jnc:
+
+jc:
+	Feltétel ugrás, akkor ugrik ha a "carry" flag 0
+	Pl.:
+	.....................................................
+
+	mov ax, 6
+	cmp ax, 5
+	jc NincsCarry
+
+	...
+
+NincsCarry:
+	;{AKKOR FUT LE HA A "CARRY" FLAG 0}
+	;{EZ AZT IS JELENTI HOGY A 6 NAGYOBB VAGY EGYENLŐ MINT AZ 5, HA ERRE VAGYUNK KÍVÁNCSIAK ILYEN MÓDON IS LEHET VIZSGÁLNI}
+
+	.....................................................
+
+#####################################################
+
+*5.10* - *többi jump*
+
+stb... többi ugrás is hasonlóan működik csak más feltétellel rendelkeznek
+Több kondícionális ugrásra példa és azok negáltjai:
+
+JE/JNE = Equal, ez kb ugyan az mint a JZ/JNZ
+JO/JNO = Overflow
+JS/JNS = Signed
+JP/JNP, JPE/JPO = Parity, even(páros)/odd(páratlan). JP/JNP, JPE/JPO pár ugyan azt jelenti
+
+
+#####################################################
+#####################################################
+#####################################################
+
+*6* - *bináris műveletek*
+Bináris műveletek:
+
+*6.1* - *and*
+and:
+	Logikai "és" művelet, olyan mint az "&="
+	and {MIT}, {MIVEL}
+
+	Pl.:
+	.....................................................
+	mov ax, 0Fh
+	and ax, 3 ;ax &= 3 -> ax == 03h
+	.....................................................
+
+	
+	ax:  0 | 0 | 0 | 0 | 1 | 1 | 1 | 1
+	3:	 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1
+	----------------------------------
+	and: 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1
+
+#####################################################
+
+*6.2* - *or*
+or:
+	Logikai "vagy" művelet, olyan mint az "|="
+	or {MIT}, {MIVEL}
+
+	Pl.:
+	.....................................................
+	mov ax, 0Fh
+	or ax, 41h ;ax &= 0x41 -> ax == 4Fh
+	.....................................................
+	
+	ax: 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1
+	65:	0 | 1 | 0 | 0 | 0 | 0 | 0 | 1
+	---------------------------------
+	or: 0 | 1 | 0 | 0 | 1 | 1 | 1 | 1
+
+#####################################################
+
+*6.3* - *xor*
+xor:
+	Logikai "kizáró vagy" művelet, olyan mint az "^="
+	xor {MIT}, {MIVEL}
+
+	Pl.:
+	.....................................................
+	mov ax, 0Fh
+	xor ax, 41h ;ax ^= 0x41 -> ax == 4Eh
+	.....................................................
+
+	
+	ax:  0 | 0 | 0 | 0 | 1 | 1 | 1 | 1
+	65:	 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1
+	----------------------------------
+	xor: 0 | 1 | 0 | 0 | 1 | 1 | 1 | 0
+
+#####################################################
+
+*6.4* - *shl*
+shl:
+	Bitléptetés balra, olyan mint az "<<=" 
+
+	shl {MIT}, {MENNYIVEL}
+
+	Pl.:
+	.....................................................
+	mov ax, 0Fh
+	shl ax, 4 ;ax <<= 4 -> ax == F0h
+	.....................................................
+
+	
+	       ax: 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1
+	----------------------------------------
+	shl ax, 4: 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0
+
+	Ha kimozgatjuk az értéket akkor nem fog körbefordulni:
+
+	.....................................................
+	mov ax, 80h
+	shl ax, 1 ;ax == 0
+	.....................................................
+
+#####################################################
+
+*6.5* - *shr*
+shr:
+	Bitléptetés jobbra, olyan mint az ">>=" 
+
+	shr {MIT}, {MENNYIVEL}
+
+	Pl.:
+	.....................................................
+	mov ax, 0Fh
+	shr ax, 2 ;ax >>= 4 -> ax == 03h
+	.....................................................
+
+	
+	       ax: 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1
+	----------------------------------------
+	shr ax, 2: 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1
+
+	Ha kimozgatjuk az értéket akkor nem fog körbefordulni:
+
+	.....................................................
+	mov ax, 0Fh
+	shr ax, 1 ;ax == 7
+	.....................................................
+
+
+#####################################################
+
+*6.6* - *rol*
+rol:
+	Bitléptetés körbefordulással
+	rol {MIT}, {MENNYIVEL}
+
+	Pl.:
+	.....................................................
+	mov ax, F0h
+	rol ax, 1; ax == E1h
+	.....................................................
+
+	       ax: 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0
+	----------------------------------------
+	rol ax, 1: 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1
+
+#####################################################
+
+*6.7* - *ror*
+ror:
+	Bitléptetés körbefordulással
+	ror {MIT}, {MENNYIVEL}
+
+	Pl.:
+	.....................................................
+	mov ax, 0Fh
+	ror ax, 1; ax == 87h
+	.....................................................
+	
+
+	       ax: 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1
+	----------------------------------------
+	ror ax, 1: 1 | 0 | 0 | 0 | 0 | 1 | 1 | 1
+
+
+#####################################################
+#####################################################
+#####################################################
