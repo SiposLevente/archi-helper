@@ -8,7 +8,7 @@ Fontosabb assembly utasítások, Dosboxban való programok futtatása.
 |3 sor '#'|Nagyobb témák elválasztása.|-|
 |1 sor '#'|Egy nagy témát több kisebb alrészre bont.|-|
 |Szöveg/szám '*' között|Gyors elérésm témák száma, neve. Ezekre ha rákeresünk egyből az adott témához ugorhatunk.|\*6.5\* - \*shr\*|
-|Egy sor '.'|Elválasztó jel, 2 ilyen sor között programkód található|-|
+|Egy sor '='|Elválasztó jel, 2 ilyen sor között programkód található|-|
 |{SZOVEG}|Behelyettesítendő szöveg|shr {MIT},{MENNYIVEL}|
 |...|Nem lényeges kód sorok, ez akár több sort is reprezentálhat, de nem lényeges a bemutató szempontjából|...|
 
