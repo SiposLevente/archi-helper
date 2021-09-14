@@ -14,6 +14,8 @@ C:\> link.exe program.obj,,,,
 
 *2* - *program váz*
 Alap program váz (utána egy üres sor!!):
+!!! A program részek amiknek ':' van a végén azok autómatikusan lefutnak még ha nem is ugranak bele!!!
+!!! Ha azt szeretnénk hogy egy elágazás után vége legyen a programnak akkor meg kell hívni a "jmp Program_Vege" utasítást!!!
 .....................................................
 
 Code	Segment
