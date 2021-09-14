@@ -14,10 +14,10 @@ Fontosabb assembly utasítások, Dosboxban való programok futtatása.
 
 ## Témák gyors elérése:
 ### Használata:
-Az "ArchiHelper.txt" állományban keressünk rá az adott számú elem számára vagy nevére.
+Az "ArchiHelper.txt" állományban keressünk rá az adott számú elem számára vagy nevére. **Ha egy nagyobb téma van akkor a téma elején lehetnek összefoglaló információk amik az egész témára és azok alrészeire is vonatkoznak**
 
 Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza: 
-    keresés szövege: \*2\* vagy \*program váz\* vagy \*2\* - \*program váz\*
+    keresés szövege: "\*2\*" vagy "\*program váz\*" vagy "\*2\* - \*program váz\*"
 
 1. exe létrehozása
 1. program váz
