@@ -107,7 +107,7 @@ int 21h
 Program_Vége:
 	...
 
-; A "Code	Ends" feletti területen érdemes ezeket a szövegeket deklarálni
+; A "Start:" feletti területen érdemes ezeket a szövegeket deklarálni
 ; $ jel kell a szöveg végére, eddig írja ki a program a szöveget
 ; pl.: "Ez egy$uzenet" -> 'Ez egy'
 
