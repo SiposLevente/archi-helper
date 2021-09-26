@@ -321,6 +321,63 @@ JS/JNS = Signed
 JP/JNP, JPE/JPO = Parity, even(páros)/odd(páratlan). JP/JNP, JPE/JPO pár ugyan azt jelenti
 
 ################################################################################################################################
+
+*5.11* - *loop*
+
+Ciklusok megvalósításához használható, hasonló mint a JMP utasítással létrehozott loop.
+Különbség a kettő között az hogy ha "loop" utasítást használunk akkor meg tudjuk könnyedén adni hogy hányszor fusson le a ciklus.
+Ciklus lefutásának a számát a "cx" regiszterben található érték befolyásolja. Minden egyes ciklus lefutás után ebből a regiszterből levonódik egy és ha ez eléri a 0-t akkor kilép a ciklusból.
+
+Hasonló mint C nyelvben a következő:
+A példában a "cx" regisztert a counter reprezentálja.
+
+================================================================================================================================
+
+unsigned char counter = 5;
+
+// Addig fut a while ciklus még a counter értéke 0 nem lesz.
+while(!counter--) {
+
+	...
+
+}
+
+================================================================================================================================
+
+Loop használata assemblyben:
+
+================================================================================================================================
+
+	mov cx, ;{AHÁNYSZOR SZERETNÉNK HOGY A CIKLUS LEFUSSON}
+
+Valami:
+	...
+	loop Valami
+
+================================================================================================================================
+
+Példa:
+
+10x írassuk ki az 'A' betűt:
+
+================================================================================================================================
+
+	...
+	
+	mov cx, 10 ;Számláló regiszter beállítása
+	mov AH, 02
+
+Kiirat:
+	mov DL, 'A'
+	int 21h
+
+	loop Kiirat
+
+	...
+
+================================================================================================================================
+
+################################################################################################################################
 ################################################################################################################################
 ################################################################################################################################
 
