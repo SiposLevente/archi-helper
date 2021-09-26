@@ -594,7 +594,7 @@ int 16h
 ################################################################################################################################
 
 *9* - *számlálás*
-Egy "db"-ben eltárolt karakter jövelése.
+Egy "db"-ben eltárolt karakter növelése.
 Pl.: ha egy szöveg a következő "0$" ha ezt megnöveljük akkor "1$" lesz
 
 Ha egy szövegen belül több karakter van akkor mindig a legelső(a legbalrább) lévő karakter fog növekedni! 
