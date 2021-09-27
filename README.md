@@ -11,7 +11,7 @@ Fontosabb assembly utasítások, Dosboxban való programok futtatása.
 |Egy sor '='|Elválasztó jel, 2 ilyen sor között programkód található|-|
 |{SZOVEG}|Behelyettesítendő szöveg|shr {MIT},{MENNYIVEL}|
 |...|Nem lényeges kód sorok, ez akár több sort is reprezentálhat, de nem lényeges a bemutató szempontjából|...|
-|!!! {SZÖVEG} !!!| Fontos dolog |
+|!!! {SZÖVEG} !!!| Fontos dolog | !!! Ez egy nagyon fontos szöveg !!! ||
 
 ## Témák gyors elérése:
 ### Használata:
