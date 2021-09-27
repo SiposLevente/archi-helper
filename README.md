@@ -11,7 +11,7 @@ Fontosabb assembly utasítások, Dosboxban való programok futtatása.
 |Egy sor '='|Elválasztó jel, 2 ilyen sor között programkód található|-|
 |{SZOVEG}|Behelyettesítendő szöveg|shr {MIT},{MENNYIVEL}|
 |...|Nem lényeges kód sorok, ez akár több sort is reprezentálhat, de nem lényeges a bemutató szempontjából|...|
-|!!! {SZÖVEG} !!!| Fontos dolog |
+|!!! {SZÖVEG} !!!| Fontos dolog | !!! Ez egy nagyon fontos szöveg !!! ||
 
 ## Témák gyors elérése:
 ### Használata:
@@ -61,4 +61,4 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
 7. EXE létrehozása Dosboxban: **<code>masm.exe program.asm,,,,</code>** majd **<code>link.exe program.obj,,,,</code>**
 8. EXE futtatása: **<code>program.exe</code>**
 
-A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén nem kell újra felcsatolni viszont, ha új fájlt hozunk létre akkor újra felcsatolni mount-al**!
+A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén nem kell újra felcsatolni viszont, ha új fájlt hozunk létre akkor kell csak újra felcsatolni mount-al**!
