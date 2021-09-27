@@ -7,11 +7,11 @@ Fontosabb assembly utasítások, Dosboxban való programok futtatása.
 |----|----|----|
 |3 sor '#'|Nagyobb témák elválasztása.|-|
 |1 sor '#'|Egy nagy témát több kisebb alrészre bont.|-|
-|Szöveg/szám '*' között|Gyors elérés, témák száma, neve. Ezekre ha rákeresünk egyből az adott témához ugorhatunk.|\*6.5\* - \*shr\*|
-|Egy sor '='|Elválasztó jel, 2 ilyen sor között programkód található|-|
-|{SZOVEG}|Behelyettesítendő szöveg|shr {MIT},{MENNYIVEL}|
-|...|Nem lényeges kód sorok, ez akár több sort is reprezentálhat, de nem lényeges a bemutató szempontjából|...|
-|!!! {SZÖVEG} !!!| Fontos dolog | !!! Ez egy nagyon fontos szöveg !!! ||
+|Szöveg/szám '*' között|Gyors elérés, témák száma, neve. Ezekre ha rákeresünk egyből az adott témához ugorhatunk.|\*4.5\* - \*shr\*|
+|Egy sor '='|Elválasztó jel, 2 ilyen sor között programkód található.|-|
+|{SZOVEG}|Behelyettesítendő szöveg.|shr {MIT},{MENNYIVEL}|
+|...|Nem lényeges kód sorok, ez akár több sort is reprezentálhat, de nem lényeges a bemutató szempontjából.|...|
+|!!! {SZÖVEG} !!!|Fontos dolog.| !!! Ez egy nagyon fontos szöveg !!! ||
 
 ## Témák gyors elérése:
 ### Használata:
@@ -22,8 +22,6 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
 
 1. exe létrehozása
 1. program váz
-1. karakter kiíratás
-1. szöveg kiíratás
 1. műveletek
     1. mov
     1. add
@@ -47,7 +45,9 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
 1. konzol kezelés
     1. képernyő törlés
     1. kurzor pozícionálása
-1. karakter bevitel
+    1. karakter bevitel
+    1. karakter kiíratás
+    1. szöveg kiíratás
 1. számlálás
 
 ## Dosboxban programok futtatása
