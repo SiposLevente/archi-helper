@@ -61,4 +61,4 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
 7. EXE létrehozása Dosboxban: **<code>masm.exe program.asm,,,,</code>** majd **<code>link.exe program.obj,,,,</code>**
 8. EXE futtatása: **<code>program.exe</code>**
 
-A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén nem kell újra felcsatolni viszont, ha új fájlt hozunk létre akkor újra felcsatolni mount-al**!
+A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén nem kell újra felcsatolni viszont, ha új fájlt hozunk létre akkor kell csak újra felcsatolni mount-al**!
