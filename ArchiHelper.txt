@@ -335,7 +335,7 @@ A példában a "cx" regisztert a counter reprezentálja.
 
 unsigned char counter = 5;
 
-// Addig fut a while ciklus még a counter értéke 0 nem lesz. 0 = fase.
+// Addig fut a while ciklus még a counter értéke 0 nem lesz. 0 = false.
 while(counter--) {
 
 	...
