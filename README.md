@@ -34,6 +34,7 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. jnc
     1. többi jump
     1. loop
+    1. offset
 1. bináris műveletek
     1. and
     1. or
