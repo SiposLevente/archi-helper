@@ -1,5 +1,5 @@
 # Archi Helper
-Fontosabb assembly utasítások, Dosboxban való programok futtatása.
+Fontosabb assembly(masm) utasítások és Dosbox környezet megfelelő beállítása.
 
 ## Jelek értelmezése az "ArchiHelper.txt" állományban:
 
