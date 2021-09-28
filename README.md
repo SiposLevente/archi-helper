@@ -69,6 +69,6 @@ A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén 
 
 ### Könyvtárak autómatikus csatolása
 
-1. Keressük meg a **dosbox.conf** fájlunkat (Windows: **<code>{MEGHAJTÓ}:\Users\{FELHASZNÁLÓNÉV}\AppData\Local\DOSBox\dosbox-{VERZIÓSZÁM}.conf</code>**, Linux: **<code>~/.dosbox/<code>**:, Mac OS X: **<code>~/Library/Preferences/DOSBox {VERZIÓSZÁM} Preferences/<code>**)
+1. Keressük meg a **dosbox.conf** fájlunkat (Windows: **<code>{MEGHAJTÓ}:\Users\{FELHASZNÁLÓNÉV}\AppData\Local\DOSBox\dosbox-{VERZIÓSZÁM}.conf</code>**, Linux: **<code>~/.dosbox/</code>**:, Mac OS X: **<code>~/Library/Preferences/DOSBox {VERZIÓSZÁM} Preferences/<code>**)
 1. Végére írjuk a következőt: Több mappa autómatikus felcsatolása esetén többször egymás után írjuk a következő sort a megfelelő módosításokkal:**<code>mount c {VALAMILYEN MAPPA AMIT FEL SZERETNÉNK CSATOLNI}</code>** **!!! Több mappa esetén ügyeljünk a meghajtók betűjelére !!!**
 1. (OPCIONÁLIS) Ha szeretnénk akkor autómatikusan a felcsatolt meghajtóba válthatunk: **<code>c:</code>**
