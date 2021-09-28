@@ -331,10 +331,62 @@ Használható szövegek bejárására is. Például olyan feladatokhoz hogy egy 
 
 ================================================================================================================================
 
-;wip majd kerül ide példa karakter számlálásra
+	...
+
+	mov cx, 0 ;"di" regiszterben fogjuk eltárolni hogy éppen hanyadik betűnél járunk
+Vizsg:
+	mov di, offset uzenet ;Beállítjuk a "di" regisztert hogy az a "uzenet" kezdetére mutasson 
+	add di, cx ;"hozzáadjuk a mutatóhoz hogy hanyadik betűnél jártunk"
+
+	mov al, 'e'	; \
+	cmp [di], al;  > Megvizsgáljuk hogy az éppen kijelölt betű 'e'-e, ha igen ugrunk a "Novel" kódrészhez
+	jz Novel	; /
+	mov al, '$'		;\
+	cmp [di], al	; > Megvizsgáljuk hogy a szöveg végéhez értünk e. Ha igen akkor elugrunk a program végéhez.
+	jz Program_Vege	;/
+	inc cx ;Növeljük a "cx" regiszter érétkét, ezzel egyel tovább haladunk a betűvizsgálatban
+	jmp Vizsg ;Ha se nem 'e' se nem '$' akkor folytatjuk tovább a vizsgálatot
+
+Novel:
+	mov di, offset ertek	;\
+	mov al, [di]			; \ Növeljük a számláló értékét 
+	inc al					; /
+	mov [di], al			;/
+	inc cx ;Növeljük a betűszámláló értékét
+	jmp Vizsg ;Visszaugrunk a vizsgálatba és folytatódik tovább a program
+
+	...
 
 ================================================================================================================================
 
+################################################################################################################################
+
+*3.13* - *kapcsos zárójel* - *[]*
+
+Ezt akkor használjuk amikor egy regiszterben eltárolt pointer értékét szeretnénk használni módosítani.
+
+Pl:
+================================================================================================================================
+	...
+
+	mov di, offset ertek ;"di" eddig az a ra mutatott
+	inc [di] ;"di" mostmár a b re mutat
+
+	...
+
+ertek db "ab$"
+
+================================================================================================================================
+
+Különbség "mov ax, 10" és "mov [ax], 10" között.
+
+1, mov ax, 10
+
+Ebben az esetben a 10 az "ax" regiszterbe kerül.
+
+2, mov [ax], 10
+
+Ebben az esetben a 10 oda kerül ahova az "ax" pointer mutat. Itt az "ax" csak egy mutató egy cím felé.
 
 ################################################################################################################################
 ################################################################################################################################
@@ -622,7 +674,7 @@ uzenet db "Ez egy uzenet!$"
 Egy "db"-ben eltárolt karakter növelése.
 Pl.: ha egy szöveg a következő "0$" ha ezt megnöveljük akkor "1$" lesz
 
-Ha egy szövegen belül több karakter van akkor mindig a legelső(a legbalrább) lévő karakter fog növekedni! 
+Ha egy szövegen belül több karakter van akkor mindig a legelső(a legbalrább) lévő karakter fog növekedni, kivéve ha a "di értékét módosítjuk.
 
 ================================================================================================================================
 
@@ -632,6 +684,21 @@ inc al ;ha pl 2-vel szeretnénk növelni a karaktert akkor ennek a sor helyére 
 mov [di], al
 
 ================================================================================================================================
+
+Példa számlálás 9-nél nagyobb számokkal:
+
+================================================================================================================================
+
+	...
+
+	; WIP
+
+	...
+
+szamlalo db "00$"
+
+================================================================================================================================
+
 
 ################################################################################################################################
 ################################################################################################################################
