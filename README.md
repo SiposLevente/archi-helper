@@ -52,15 +52,25 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. szöveg kiíratás
 1. számlálás
 
-## Dosboxban programok futtatása
+## Dosbox
+
+### Programok futtatása
 
 1. Hozzunk létre egy mappát a számítógépünkön amiben majd a programunkat fogjuk elkészíteni, ebben a mappában előnyös ha benne van a **masm.exe** és a **link.exe**.
-2. Hozzunk létre egy programot **.asm** kiterjesztéssel a mappában.
-3. Nyissuk meg a Dosboxot.
-4. írjuk be a következőt: **<code>mount c {mappánk elérési utvonala}</code>**
-5. Váltsunk a felcsatolt mappába: **<code>C:</code>**
-6. (Opcionális) Győződjünk meg hogy az adott filejaink a mappában vannak-e: **<code>dir</code>**
-7. EXE létrehozása Dosboxban: **<code>masm.exe program.asm,,,,</code>** majd **<code>link.exe program.obj,,,,</code>**
-8. EXE futtatása: **<code>program.exe</code>**
+1. Hozzunk létre egy programot **.asm** kiterjesztéssel a mappában.
+1. Nyissuk meg a Dosboxot.
+1. írjuk be a következőt: **<code>mount c {mappánk elérési utvonala}</code>**
+1. Váltsunk a felcsatolt mappába: **<code>C:</code>**
+1. (Opcionális) Győződjünk meg hogy az adott fájljaink a mappában vannak-e: **<code>dir</code>**
+1. EXE létrehozása Dosboxban: **<code>masm.exe program.asm,,,,</code>** majd **<code>link.exe program.obj,,,,</code>**
+1. EXE futtatása: **<code>program.exe</code>**
 
 A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén nem kell újra felcsatolni viszont, ha új fájlt hozunk létre akkor kell csak újra felcsatolni mount-al**!
+
+### Könyvtárak autómatikus csatolása
+
+1. Keressük meg a **dosbox.conf** fájlunkat (Windows: **<code>{MEGHAJTÓ}:\Users\{FELHASZNÁLÓNÉV}\AppData\Local\DOSBox\dosbox-{VERZIÓSZÁM}.conf</code>**, Linux: **<code>~/.dosbox/<code>**:, Mac OS X: **<code>~/Library/Preferences/DOSBox {VERZIÓSZÁM} Preferences/<code>**)
+1. Végére írjuk a következőt: Több mappa autómatikus felcsatolása esetén többször egymás után írjuk a következő sort a megfelelő módosításokkal:
+    **<code>mount c {VALAMILYEN MAPPA AMIT FEL SZERETNÉNK CSATOLNI}</code>**
+    **!!! Több mappa esetén ügyeljünk a meghajtók betűjelére !!!**
+1. (OPCIONÁLIS) Ha szeretnénk akkor autómatikusan a felcsatolt meghajtóba válthatunk: **<code>c:</code>**
