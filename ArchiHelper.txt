@@ -688,14 +688,47 @@ mov [di], al
 Példa számlálás 9-nél nagyobb számokkal:
 
 ================================================================================================================================
+	...
+
+	szamlalo db "00$"
 
 	...
 
-	; WIP
+	mov cx, 90; ;Loop beállítása
+Novel:
+	mov dx, offset ertek ; \
+	mov ah, 09			 ;  \
+	int 21h				 ;   \
+	mov ah, 02			 ;    > Kiíratás
+	mov dl, ' '			 ;   /
+	int 21h				 ;  /
+
+	mov di, offset ertek	; \
+	inc di					;  \
+	mov al, [di]			;   > Érték második karakterjének a léptetése
+	inc al					;  /
+	mov [di], al			; /
+
+	mov ah, '9'				;\ Ha a második karakter 9 és növelni szeretnénk akkor az első karakter értéke növelődik 1-el
+	cmp ah, al				;/ 
+	js Leptet
+	loop Novel				;Loop vissza a "Novel" kódrész kezdetéhez
+	jmp Program_Vege		;Loop után vége a programnak
+	
+Leptet:
+	mov di, offset ertek	;\
+	mov al, [di]			; > Első karakter megnövelése
+	inc al					;/
+	
+	mov [di], al			;\
+	inc di					; \
+	mov al, [di]			;  > Második karakterből kivonunk 10-et, ezzel visszaállítva annak az értékét '0'-ra
+	sub al, 10				; /
+	mov [di], al			;/
+	
+	jmp Novel				; Visszaugrás a "Novel" kódrészhez
 
 	...
-
-szamlalo db "00$"
 
 ================================================================================================================================
 
