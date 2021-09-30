@@ -370,7 +370,7 @@ Pl:
 	...
 
 	mov di, offset ertek ;"di" eddig az a ra mutatott
-	inc [di] ;"di" mostmár a b re mutat
+	inc di ;"di" mostmár a b re mutat
 
 	...
 
