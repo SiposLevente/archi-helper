@@ -226,7 +226,7 @@ jnc:
 
 	mov ax, 6
 	cmp ax, 5
-	jc NincsCarry
+	jnc NincsCarry
 
 	...
 
