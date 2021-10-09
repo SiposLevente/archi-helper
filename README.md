@@ -38,6 +38,9 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. loop
     1. offset
     1. kapcsos zárójel - []
+    1. push/pop
+    1. mul
+    1. div
 1. bináris műveletek
     1. and
     1. or
@@ -53,6 +56,11 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. karakter kiíratás
     1. szöveg kiíratás
 1. számlálás
+1. gyakori feladatok
+    1. karakteres alakzat kirajzolása
+    1. karakter számolás egy szövegben
+    1. szöveg megfordítása
+    1. szövegben lévő egyenelt megoldása
 
 ## Dosbox
 

@@ -50,6 +50,8 @@ Stack	Ends
 *3* - *műveletek*
 Műveletek:
 
+################################################################################################################################
+
 *3.1* - *mov*
 mov:
 	Egyik memória területről a másikba való másolás
@@ -389,11 +391,127 @@ Ebben az esetben a 10 az "ax" regiszterbe kerül.
 Ebben az esetben a 10 oda kerül ahova az "ax" pointer mutat. Itt az "ax" csak egy mutató egy cím felé.
 
 ################################################################################################################################
+
+*3.14* - *push/pop*
+
+Ezzel a két művelettel lehet regiszterek értékét a verembe(stack)-be mozgatni, illetve kiszedni azokat onnan egy megadott regiszterbe.
+
+!!! A verembe mozgatott érték regiszterének az értéke nem fog változtni mozgatás után !!!
+!!! A verembe csakis teljes regisztereket lehet mozgatni, nem lehet külön az "xl" vagy a "xh" regisztereket
+!!! A verem LIFO elven működik, ez azt jelenti hogy azt pop oljuk amit utoljára pusholtunk !!!
+!!! Ha pop olunk akkor a popolt érték felülírja a megadott regiszter tartalmát !!!
+
+Pl.:
+================================================================================================================================
+
+	...
+
+	mov dl, 1
+	push dx
+
+	mov ah, 02h
+	int 21h			; "dl" értéke még mindig 1 annak ellenére hogy a verembe mozgattuk az értékét
+					; veremben eltároltuk a "dx" értékét
+	...
+
+================================================================================================================================
+
+Akkor hasznos ha pl. valamilyen utasítást akarunk elvégezni de a számunkra fontos eredmény értéke abban a regiszterben található ahová az utasítás paramétereit kell mozgatni.
+
+Pl.: Szorzás eredményét, és egy másik regiszter eredményét el szeretnénk tárolni, úgy hogy a kiiratásuk között egy másik karaktert is ki szeretnénk iratni.
+================================================================================================================================
+
+	mov ax, 2
+	mov dx, 4
+	mul dx
+
+	mov dx, 6
+
+	push ax ; szorzás eredményét bemozgattuk a verembe
+	push dx ; másik számot is bemozgattuk a verembe
+
+	mov ah, 02h
+	mov dl, 'A'
+	int 21h
+
+	pop dx ; LIFO elven működnek a vermek
+	add dl, '0'
+	int 21h
+
+	pop dx
+	add dl, '0'
+	int 21h
+
+================================================================================================================================
+
+################################################################################################################################
+
+*3.15* - *mul*
+
+Szorzás. 2 regiszter értékét összeszorozza.
+
+!!! Ha 2 16-bites szám szorzása az alábbi példa alapján nagyobb számot eredményezne akkor a szám also 16 bitje az "ax" regiszterben lesz megtalálható a felső része a "dx" regiszterben
+
+16-bites számok szorzása:
+================================================================================================================================
+
+	...
+
+	mov ax, 5
+	mov dx, 10
+	mul dx ; ax = ax * dx -> ax = 50
+
+	mov cx, 2
+	mul cx ; ax = ax * cx -> cx = 100
+
+	...
+
+================================================================================================================================
+
+!!! Ha 8 bitnél nagyobb lesz a szám akkor az "ah" és az "al" ben fog eltárolódni a szám.
+
+8-bites számok szorzása:
+================================================================================================================================
+
+	mov al, 2
+	mov dl, 2
+	mul dl ; al = al * dl
+
+================================================================================================================================
+
+################################################################################################################################
+
+*3.16* - *div*
+
+Osztás.
+
+16-bites szám osztása 8-bites számmal ("al" regiszterben fog eltárolódni az osztás egész értéke, "ah" reg.-ben pedig az osztás maradéka):
+================================================================================================================================
+
+	mov ax, 16
+	mov dl, 8
+	div dl ; al = ax / dl -> al = 2
+
+================================================================================================================================
+
+
+16-bites szám osztása 8-bites számmal, maradékkal 
+================================================================================================================================
+
+	mov ax, 16
+	mov dl, 7
+	div dl ; al = (ax / dl) -> al = 2, ah = 2
+
+================================================================================================================================
+
+################################################################################################################################
 ################################################################################################################################
 ################################################################################################################################
 
 *4* - *bináris műveletek*
 Bináris műveletek:
+
+################################################################################################################################
 
 *4.1* - *and*
 and:
@@ -558,6 +676,8 @@ ror:
 
 *5* - *konzol kezelés*
 Különféle megjelenítéssel és adat bevitellel kapcsolatos utasítások.
+
+################################################################################################################################
 
 *5.1* - *képernyő törlés*
 Hasonló eredménye van mint a "Console.Clear()"-nek.
@@ -732,6 +852,280 @@ Leptet:
 
 ================================================================================================================================
 
+
+################################################################################################################################
+################################################################################################################################
+################################################################################################################################
+
+*7* - *gyakori feladatok*
+
+ZH-k ban előforduló gyakori feladatok.
+
+################################################################################################################################
+
+*7.1* - *karakteres alakzat kirajzolása*
+
+Különböző alakzatok kirajzolása. Pl.: négyzet, háromszög, rombusz
+
+Oldalas kód részek határozzák meg hogy mennyi oldala van egy alakzatnak.
+A "cx" regiszterbe betöltött érték az oldal hosszát + 1 et jelenti.
+Minden oldalon a "dl", "dh" regiszter növelésével vagy csökkentésével lehet az oldal irányát állítani.
+
+┌----------------------------------┐
+| 		     		 -->		   |
+| 		  inc dl => ######		   |
+| 								   |
+├----------------------------------┤
+| 		     		 <--		   |
+| 		  dec dl => ######		   |
+| 								   |
+├----------------------------------┤
+| 		     		  |	#		   |
+| 		  inc dh =>   |	#		   |
+| 					  V	#		   |
+├----------------------------------┤
+| 		     		  /\  #		   |
+| 		  inc dh =>   |	  #		   |
+| 					  |	  #		   |
+├----------------------------------┤
+| 		     		  /\  #		   |
+| 		  inc dh =>   |	  #		   |
+| 					  |	  #		   |
+├----------------------------------┤
+|					#	\		   |
+| 		  inc dh     #	 \		   |
+| 		  inc dl =>   #	  \		   |
+| 					   #   V	   |
+├----------------------------------┤
+|					#	/\		   |
+| 		  dec dh     #	 \		   |
+| 		  dec dl =>   #	  \		   |
+| 					   #   \	   |
+├----------------------------------┤
+|					   #  /		   |
+| 		  inc dh      #	 /	   	   |
+| 		  dec dl =>  #  /		   |
+| 					#  V		   |
+├----------------------------------┤
+|					   # /\		   |
+| 		  dec dh      #	 /	   	   |
+| 		  inc dl =>  #  /		   |
+| 					#  /		   |
+└----------------------------------┘
+
+
+
+Négyzet (5x5, [3,3] kezdőponttal):
+================================================================================================================================
+
+	mov dh, 3 ; y
+	mov dl, 3 ; x
+
+	mov cx, 4
+ElsoOldal:
+	mov ah, 02h
+	mov bh, 0
+	inc dl
+	int 10h
+
+	push dx
+
+	mov ah, 02h
+	mov dl, 'X'
+	int 21h
+	pop dx
+	loop ElsoOldal
+
+	mov cx, 4
+MasodikOldal:
+	mov ah, 02h
+	mov bh, 0
+	inc dh
+	int 10h
+	push dx
+	mov ah, 02h
+	mov dl, 'X'
+	int 21h
+	pop dx
+	loop MasodikOldal
+
+	mov cx, 4
+HarmadikOldal:
+	mov ah, 02h
+	mov bh, 0
+	dec dl
+	int 10h
+	push dx
+	mov ah, 02h
+	mov dl, 'X'
+	int 21h
+	pop dx
+	loop HarmadikOldal
+
+	mov cx, 4
+NegyedikOldal:
+	mov ah, 02h
+	mov bh, 0
+	dec dh
+	int 10h
+	push dx
+	mov ah, 02h
+	mov dl, 'X'
+	int 21h
+	pop dx
+	loop NegyedikOldal
+
+================================================================================================================================
+
+################################################################################################################################
+
+*7.2* - *karakter számolás egy szövegben*
+
+Egy adott stringben egy adatt karakter megszámolása, és kiíratása.
+
+"e"-betű megszámolása és kiíratása
+
+================================================================================================================================
+
+	...	mov cx, 0
+	mov di, offset uzenet
+Szamolo:
+	mov dx, [di]
+	cmp dl, 36
+	jz Fordito
+	inc cx
+	inc di
+	jmp Szamolo
+
+Fordito:
+	mov di, offset uzenet
+	dec di
+	add di, cx
+	mov dl, [di]
+	mov ah, 02h
+	int 21h
+	loop Fordito
+
+
+Program_Vege:
+	mov ax, 4c00h
+	int 21h
+
+uzenet db "valami amit meg kene forditani$"
+
+	mov bl, 0 ; számoló
+	mov di, offset uzenet
+Betuvizsgal:
+	mov dx, [di]
+	cmp dl, 'e'
+	jz Novel
+	cmp dl, 36
+	jz Kiir
+	inc di
+	jmp Betuvizsgal
+
+Novel:
+	inc di
+	inc bl
+	jmp Betuvizsgal
+
+Kiir:
+	mov ah, 02h
+	mov dl, bl
+	add dl, '0'
+	int 21h
+
+	...
+
+uzenet db "egy adott szoveg amiben meg kene szamolni a karaktereket$" ; 8-e
+
+
+================================================================================================================================
+
+################################################################################################################################
+
+*7.3* - *szöveg megfordítása*
+
+Egy adott stringben található szöveg megfordítása.
+
+================================================================================================================================
+
+	...
+
+	mov cx, 0
+	mov di, offset uzenet
+Szamolo:
+	mov dx, [di]
+	cmp dl, 36
+	jz Fordito
+	inc cx
+	inc di
+	jmp Szamolo
+
+Fordito:
+	mov di, offset uzenet
+	dec di
+	add di, cx
+	mov dl, [di]
+	mov ah, 02h
+	int 21h
+	loop Fordito
+
+	...
+
+uzenet db "valami amit meg kene forditani$"
+
+================================================================================================================================
+
+################################################################################################################################
+
+7.4. szövegben lévő egyenelt megoldása*
+
+================================================================================================================================
+
+	...
+
+	mov di, offset uzenet  ;\
+	mov ax, [di]			;|
+							;|
+	sub ax, '0'				;|
+							;|
+	add di, 2				;|  Szövegből a két számjegy kiolvasása.
+	mov dx, [di]			;|
+	sub dx, '0'				;|
+							;|
+	mul dx					;|
+	push ax				   ;/
+
+	xor dx, dx				;Osztás előkészítése, eredmény itt lesz eltárolva
+	mov cl, 10				;A kapott eredményet elosztjuk 10 el, megkapjuk, hogy 10^1 szer mennyi az eredmény első tagja
+	div cx
+
+	mov ah, 02h				;\
+	add dl, '0'				;| Eredmény első tagjának kiiratása
+	int 21h					;/
+
+	sub dl, '0'
+
+	mov ax, dx				;\
+	mov dx, 10				; | Eredmény első tagját beszorozzuk 10 el, így csak az első tag * 10 lesz "ax"-ben
+							; |
+	mul dx					;/
+
+	mov cx, ax				;\
+	pop ax					; | Eredeti számolás eredményét a stackből kivesszük, majd kivonjuk belőle az előző részben megkapott számot
+	sub ax, cx				; |	Tehát: eredmény - (első tag * 10) = utolsó tag
+	mov dl, al				;/
+
+	mov ah, 02h				;\
+	add dl, '0'				; | Utolsó tag kiiratása
+	int 21h					;/
+
+	...
+
+uzenet db "8*8$"
+
+================================================================================================================================
 
 ################################################################################################################################
 ################################################################################################################################
