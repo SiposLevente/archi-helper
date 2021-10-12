@@ -57,6 +57,8 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. szöveg kiíratás
     1. karakterre várás program feltartása nélkül
 1. számlálás
+    1. óra beolvasása
+    1. eltelt idő számítása
 1. gyakori feladatok
     1. karakteres alakzat kirajzolása
     1. karakter számolás egy szövegben
