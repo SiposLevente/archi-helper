@@ -778,13 +778,44 @@ int 21h
 Program_Vége:
 	...
 
-; A "Start:" feletti területen érdemes ezeket a szövegeket deklarálni
 ; $ jel kell a szöveg végére, eddig írja ki a program a szöveget
 ; pl.: "Ez egy$uzenet" -> 'Ez egy'
 
 uzenet db "Ez egy uzenet!$"
 
 ================================================================================================================================
+
+################################################################################################################################
+
+*5.6* - *karakterre várás program feltartása nélkül*
+
+Ebben a módban a program úgy képes bekérni karaktereket a felhasználótól hogy közben bármi egyebet is tud csinálni.
+Pl: karakterek folyamatos kiíráas úgy hogy a kíírt karaktert anélkül tudjuk megadni hogy a program a karakterek kiírását abbahagyja
+
+================================================================================================================================
+
+mov cl, ' '				; Kezdeti karakter egy space, eleinte ezt fogja csak kiírni
+Ciklus:
+	mov ah, 02h			;\
+	mov dl, cl			; | Elmentett karakter kiíratása
+	int 21h				;/
+	mov ah, 01h			;\
+	int 16h				; | Vizsgálja hogy a key bufferben vannak e karakterek, ha igen a zero flag 1 re áll
+	jnz KarakterMent	;/
+	jmp Ciklus
+
+KarakterMent:
+	mov ah, 00h			;\ A bufferből kivesszük a karaktert, belekerül az "al" regiszterbe
+	int 16h				;/
+
+	cmp al, 27			;\ ha ez a karakter egy esc akkor a program nem fut le tovább
+	jz Program_Vege		;/
+
+	mov cl, al			;\ Karakter mentése a "cl" regiszterbe, visszalépés a fő ciklusba
+	jmp Ciklus			;/
+
+================================================================================================================================
+
 
 ################################################################################################################################
 ################################################################################################################################
@@ -852,18 +883,26 @@ Leptet:
 
 ================================================================================================================================
 
+################################################################################################################################
+################################################################################################################################
+################################################################################################################################
+
+*7* - *időzítők*
+
+
+
 
 ################################################################################################################################
 ################################################################################################################################
 ################################################################################################################################
 
-*7* - *gyakori feladatok*
+*8* - *gyakori feladatok*
 
 ZH-k ban előforduló gyakori feladatok.
 
 ################################################################################################################################
 
-*7.1* - *karakteres alakzat kirajzolása*
+*8.1* - *karakteres alakzat kirajzolása*
 
 Különböző alakzatok kirajzolása. Pl.: négyzet, háromszög, rombusz
 
@@ -979,7 +1018,7 @@ NegyedikOldal:
 
 ################################################################################################################################
 
-*7.2* - *karakter számolás egy szövegben*
+*8.2* - *karakter számolás egy szövegben*
 
 Egy adott stringben egy adatt karakter megszámolása, és kiíratása.
 
@@ -1044,7 +1083,7 @@ uzenet db "egy adott szoveg amiben meg kene szamolni a karaktereket$" ; 8-e
 
 ################################################################################################################################
 
-*7.3* - *szöveg megfordítása*
+*8.3* - *szöveg megfordítása*
 
 Egy adott stringben található szöveg megfordítása.
 

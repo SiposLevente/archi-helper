@@ -55,6 +55,7 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. karakter bevitel
     1. karakter kiíratás
     1. szöveg kiíratás
+    1. karakterre várás program feltartása nélkül
 1. számlálás
 1. gyakori feladatok
     1. karakteres alakzat kirajzolása
