@@ -911,45 +911,45 @@ A "cx" regiszterbe betöltött érték az oldal hosszát + 1 et jelenti.
 Minden oldalon a "dl", "dh" regiszter növelésével vagy csökkentésével lehet az oldal irányát állítani.
 
 ┌----------------------------------┐
-| 		     		 -->		   |
-| 		  inc dl => ######		   |
-| 								   |
+| 		   -->		   |
+| 	inc dl => ######	   |
+| 				   |
 ├----------------------------------┤
-| 		     		 <--		   |
-| 		  dec dl => ######		   |
-| 								   |
+| 		    <--		   |
+| 	dec dl => ######	   |
+| 				   |
 ├----------------------------------┤
-| 		     		  |	#		   |
-| 		  inc dh =>   |	#		   |
-| 					  V	#		   |
+| 		    |	#	   |
+| 	inc dh =>   |	#	   |
+| 		    V	#	   |
 ├----------------------------------┤
-| 		     		  /\  #		   |
-| 		  inc dh =>   |	  #		   |
-| 					  |	  #		   |
+| 		    /\  #	   |
+| 	inc dh =>   |   #	   |
+| 		    |   #	   |
 ├----------------------------------┤
-| 		     		  /\  #		   |
-| 		  inc dh =>   |	  #		   |
-| 					  |	  #		   |
+| 	            /\  #	   |
+| 	inc dh =>   |   #	   |
+| 	            |	#	   |
 ├----------------------------------┤
-|					#	\		   |
-| 		  inc dh     #	 \		   |
-| 		  inc dl =>   #	  \		   |
-| 					   #   V	   |
+|	          #	\	   |
+| 	inc dh     #	 \	   |
+| 	inc dl =>   #	  \	   |
+| 		     #     V	   |
 ├----------------------------------┤
-|					#	/\		   |
-| 		  dec dh     #	 \		   |
-| 		  dec dl =>   #	  \		   |
-| 					   #   \	   |
+|		  #	/\	   |
+| 	dec dh     #	 \	   |
+| 	dec dl =>   #	  \	   |
+| 		     #     \	   |
 ├----------------------------------┤
-|					   #  /		   |
-| 		  inc dh      #	 /	   	   |
-| 		  dec dl =>  #  /		   |
-| 					#  V		   |
+|		     #  /	   |
+| 	inc dh      #  /	   |
+| 	dec dl =>  #  /		   |
+| 		  #  V		   |
 ├----------------------------------┤
-|					   # /\		   |
-| 		  dec dh      #	 /	   	   |
-| 		  inc dl =>  #  /		   |
-| 					#  /		   |
+|		     # /\	   |
+| 	dec dh      #  /   	   |
+| 	inc dl =>  #  /		   |
+|                 #  /		   |
 └----------------------------------┘
 
 
@@ -1124,17 +1124,17 @@ uzenet db "valami amit meg kene forditani$"
 
 	...
 
-	mov di, offset uzenet  ;\
-	mov ax, [di]			;|
-							;|
+	mov di, offset uzenet  			;\
+	mov ax, [di]				;|
+						;|
 	sub ax, '0'				;|
-							;|
+						;|
 	add di, 2				;|  Szövegből a két számjegy kiolvasása.
-	mov dx, [di]			;|
+	mov dx, [di]				;|
 	sub dx, '0'				;|
-							;|
+						;|
 	mul dx					;|
-	push ax				   ;/
+	push ax				   	;/
 
 	xor dx, dx				;Osztás előkészítése, eredmény itt lesz eltárolva
 	mov cl, 10				;A kapott eredményet elosztjuk 10 el, megkapjuk, hogy 10^1 szer mennyi az eredmény első tagja
