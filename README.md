@@ -64,6 +64,8 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. karakter számolás egy szövegben
     1. szöveg megfordítása
     1. szövegben lévő egyenelt megoldása
+1. egyéb műveletek
+    1. paraméterek kezelése
 
 ## Dosbox
 

@@ -1205,3 +1205,72 @@ uzenet db "8*8$"
 ################################################################################################################################
 ################################################################################################################################
 ################################################################################################################################
+
+*8* - *egyéb műveletek*
+
+################################################################################################################################
+
+*8.1* - *paraméterek kezelése*
+
+Paraméterek azok a dolgok amelyek program elindítása után a futtatható tartomány után írunk.
+
+!!! Figyelni kell hogy a "start" részébe a programnak "mov	di, 81h"-t kell írni. majd ha végeztünk a paraméter vizsgálattal vissza kell ezt állítani az alapértelmezettre. !!!
+
+Pl:
+================================================================================================================================
+
+program.exe {VALAMILYEN PARAMÉTER}
+
+================================================================================================================================
+
+A beolvasott paraméterek a "di" regiszterben tárolódnak el.
+A ennek a karaktersorozatnak az utolsó karaktere egy "0Dh", ezt lehet arra használni hogy kiderítsük hogy a beovlasott paraméterek végére értünk-e.
+
+Paraméterek vizsgálata, pl: '/' jel után megadott karakter kiolvasása:
+================================================================================================================================
+
+
+Code	Segment
+	assume CS:Code, DS:Data, SS:Stack
+
+Start:
+	mov di, 81h ;Paraméterkeresés indítása
+
+Keres:
+	mov dl, [di]
+	cmp dl, '/'
+	jz ParamKezel
+	cmp dl, 0Dh
+	jz NincsParam
+	inc di
+	jmp Keres
+
+ParamKezel:
+	;dl eltárolta a paraméter értékét
+	inc di
+	mov dl, [di]
+	mov ah, 02h
+	int 21h
+	jmp Init
+
+NincsParam:
+	mov ax, Code
+	mov DS, AX
+	mov dx, offset nincs
+	mov ah, 09h
+	int 21h
+	jmp Program_Vege
+
+Init:
+	mov	ax, Code ;Alapértelmezett beállítások visszaállítása paraméter kezelés után
+	mov	DS, AX
+
+...
+
+nincs db "Nincs parameter!$"
+
+================================================================================================================================
+
+################################################################################################################################
+################################################################################################################################
+################################################################################################################################
