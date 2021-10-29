@@ -1061,33 +1061,9 @@ Egy adott stringben egy adatt karakter megszámolása, és kiíratása.
 "e"-betű megszámolása és kiíratása
 
 ================================================================================================================================
-
-	...	mov cx, 0
-	mov di, offset uzenet
-Szamolo:
-	mov dx, [di]
-	cmp dl, 36
-	jz Fordito
-	inc cx
-	inc di
-	jmp Szamolo
-
-Fordito:
-	mov di, offset uzenet
-	dec di
-	add di, cx
-	mov dl, [di]
-	mov ah, 02h
-	int 21h
-	loop Fordito
-
-
-Program_Vege:
-	mov ax, 4c00h
-	int 21h
-
-uzenet db "valami amit meg kene forditani$"
-
+	
+	...
+	
 	mov bl, 0 ; számoló
 	mov di, offset uzenet
 Betuvizsgal:
