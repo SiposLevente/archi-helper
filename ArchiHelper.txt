@@ -1128,6 +1128,55 @@ uzenet db "valami amit meg kene forditani$"
 
 ================================================================================================================================
 
+Szöveg megfordítása és visszarakása a stringbe.
+
+================================================================================================================================
+
+	...
+
+mov di, offset uzenet
+	mov cx, 0
+Kiiras:
+	xor dx, dx
+	mov dl, [di]
+	cmp dl, '$'
+	jz ForditElokeszit
+	mov ah, 02h
+	int 21h
+	inc di
+	inc cx
+	push dx
+	jmp Kiiras
+
+ForditElokeszit:
+	mov si, offset uzenet
+
+Fordit:
+	pop dx
+	mov [si], dl
+	inc si
+	loop Fordit
+
+Program_Vege:
+	inc si
+	mov dl, '$'
+	mov [si], dl
+	mov ah, 02h
+	mov dl, ' '
+	int 21h
+	mov dx, offset uzenet
+	mov ah, 09h
+	int 21h
+	mov ax, 4c00h
+	int 21h
+
+uzenet db "Cuccos$"
+
+	...
+
+================================================================================================================================
+
+
 ################################################################################################################################
 
 7.4. szövegben lévő egyenelt megoldása*
