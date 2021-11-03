@@ -99,5 +99,4 @@ A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén 
 A paletta a bal felső saroktól kezdődik, és jobbra haladva egyessével növekedik. Ha egy sornak vége akkor a következő sor elejéről folytatódik tovább a számozás.
 
 A sorok számozása 16-al növekszik. Első sor 0-val kezdődik, 1.sor első elem kódja 16.
-
 ![color-pallet](images/color-pallet.png)
