@@ -1,6 +1,6 @@
+![assembly-show](images/assembly-show.png)
 # Archi Helper
 Fontosabb assembly(masm) utasítások és Dosbox környezet megfelelő beállítása.
-![assembly-show](images/assembly-show.png)
 
 ## Jelek értelmezése az "ArchiHelper.txt" állományban:
 
