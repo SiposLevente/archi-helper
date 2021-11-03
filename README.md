@@ -66,6 +66,13 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. szövegben lévő egyenelt megoldása
 1. egyéb műveletek
     1. paraméterek kezelése
+1. grafikus műveletek
+    1. grafikus módba váltás
+    1. pixel rajzolása
+    1. pixel színe
+    1. vonalak húzása
+    1. alakzatok kitöltése
+    1. grafikus módban billentyű leütések észlelése
 
 ## Dosbox
 
@@ -87,3 +94,10 @@ A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén 
 1. Keressük meg a **dosbox.conf** fájlunkat (Windows: **<code>{MEGHAJTÓ}:\Users\{FELHASZNÁLÓNÉV}\AppData\Local\DOSBox\dosbox-{VERZIÓSZÁM}.conf</code>**, Linux: **<code>~/.dosbox/</code>**:, Mac OS X: **<code>~/Library/Preferences/DOSBox {VERZIÓSZÁM} Preferences/</code>**)
 1. Végére írjuk a következőt: Több mappa autómatikus felcsatolása esetén többször egymás után írjuk a következő sort a megfelelő módosításokkal:**<code>mount c {VALAMILYEN MAPPA AMIT FEL SZERETNÉNK CSATOLNI}</code>** **!!! Több mappa esetén ügyeljünk a meghajtók betűjelére !!!**
 1. (OPCIONÁLIS) Ha szeretnénk akkor autómatikusan a felcsatolt meghajtóba válthatunk: **<code>c:</code>**
+
+## Grafikus módban a színek:
+
+A paletta a bal felső saroktól kezdődik, és jobbra haladva egyessével növekedik. Ha egy sornak vége akkor a következő sor elejéről folytatódik tovább a számozás.
+
+A sorok számozása 16-al növekszik. Első sor 0-val kezdődik, 1.sor első elem kódja 16.
+
