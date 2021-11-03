@@ -1,5 +1,4 @@
-
-![Untitled](https://user-images.githubusercontent.com/45292341/135676199-170da323-826f-4134-847b-01aac25354b8.png)
+![assembly-show](images/assembly-show.png)
 # Archi Helper
 Fontosabb assembly(masm) utasítások és Dosbox környezet megfelelő beállítása.
 
@@ -101,3 +100,4 @@ A paletta a bal felső saroktól kezdődik, és jobbra haladva egyessével növe
 
 A sorok számozása 16-al növekszik. Első sor 0-val kezdődik, 1.sor első elem kódja 16.
 
+![color-pallet](images/color-pallet.png)
