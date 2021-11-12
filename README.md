@@ -73,7 +73,7 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. vonalak húzása
     1. alakzatok kitöltése
     1. grafikus módban billentyű leütések észlelése !
-1. függvények !
+1. függvények
 
 
 ## Dosbox
