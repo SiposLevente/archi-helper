@@ -1605,6 +1605,8 @@ loop Magassag4
 
 *9.6* *grafikus módban billentyű leütések észlelése*
 
+Pontosan ugyan úgy történik mint karakteres módban, viszont figyelni kell rá hogy egyes karakterek észeléséhez azoknak a "scancode"-ját kell használnunk, ezek is ugyan úgy megtalálhatóak a helper programban.
+
 ################################################################################################################################
 ################################################################################################################################
 ################################################################################################################################
