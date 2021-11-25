@@ -1497,105 +1497,84 @@ loop Magassag
 	...
 
 ================================================================================================================================
-(szerintem nem a legjobb megoldás, majd frissítve lesz ha találok jobb megoldást)
+
+================================================================================================================================
+
+	...
+
+	mov dx, 1
+	mov cx, 50
+Cuccos:
+	push cx
+	mov cx, dx
+	Cuccos2:
+		inc di
+		mov es:[di], al
+loop Cuccos2
+	pop cx
+	add di, 320
+	sub di, dx
+	inc dx
+loop Cuccos
+
+	...
+
+================================================================================================================================
 
 Rombusz:
 ================================================================================================================================
 
 	...
 	
-	mov cx, 50
-	mov al, 14
-Magassag1:
-	mov dx, cx
-	push cx
-	mov cx, 51
-	sub cx, dx
-Oldal1:
-	mov es:[di], al
-	inc di
-loop Oldal1
-	pop cx
-	add di, 269
-	add di, dx
-loop Magassag1
+	mov ax, 0A000h
+	mov es, ax
 
-	mov ax, 49
+	mov ax, 13h
+	int 10h 
+
+	mov ax, 50
 	mov dx, 320
 	mul dx
-	add di, ax
+	add ax, 160
+	mov di, ax
+	mov al, 15
 
-	dec di
-
-	mov cx, 50
-	mov al, 13
-Magassag2:
-	mov dx, cx
-	push cx
+	mov dx, 1
 	mov cx, 51
-	sub cx, dx
-Oldal2:
-	mov es:[di], al
-	dec di
-loop Oldal2
-	pop cx
-	sub di, 269
-	sub di, dx
-loop Magassag2
-
-	mov es:[di], al
-
-	mov cx, 48
-	mov al, 12
-Magassag3:
-	mov dx, 49
-	sub dx, cx
+Cuccos:
 	push cx
-	mov cx, 50
-	sub cx, dx
-	mov dx, cx
-Oldal3:
-	mov es:[di], al
-	dec di
-loop Oldal3
-	pop cx
-	sub di, 320
-	add di, dx
-loop Magassag3
-
-	mov es:[di], al
-
-	inc di
-	mov ax, 49
-	mov dx, 320
-	mul dx
-	add di, ax
-
-	mov es:[di], al
-
-	mov cx, 48
-	mov al, 11
-Magassag4:
-	mov dx, 49
-	sub dx, cx
-	push cx
-	mov cx, 50
-	sub cx, dx
-	mov dx, cx
-Oldal4:
-	mov es:[di], al
-	inc di
-loop Oldal4
+	mov cx, dx
+	Cuccos2:
+		inc di
+		mov es:[di], al
+	loop Cuccos2
 	pop cx
 	add di, 320
+	cmp cx, 27
+
+jc Add
 	sub di, dx
-loop Magassag4
-	mov es:[di], al
+	sub di, 1
+	add dx, 2
+	loop Cuccos
+
+
+Add:
+	sub di, dx
+	add di, 1
+	sub dx, 2
+	loop Cuccos
+
+
+Program_Vege:
+	xor ax, ax
+	int 16h
+	mov ax, 02h
+	int 10h 
 
 	...
 
 ================================================================================================================================
-(4 db kitöltött háromszögből áll)
 
 ################################################################################################################################
 
