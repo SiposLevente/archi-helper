@@ -1300,6 +1300,63 @@ nincs db "Nincs parameter!$"
 
 *8.2* *bináris szám decimálissá alakítása* !
 
+Osztáson alapul a folyamat.
+
+Osztásnál az "ax"-regisztert osztjuk a megadott másik regiszterrel.
+
+Az eredmény egész része az "al"-ban fog eltárolódni, az osztás maradéka pedig az "ah"-ba kerül.
+
+Majd kiíratjuk/eltároljuk az "al"-t és tovább dolgozunk a maradékkal. 
+
+Pl:
+================================================================================================================================
+	
+	...
+	
+	mov ax, 153 ; alap értéked amit ki szeretnénk iratni
+	mov dl, 100 ; 100-al fogjuk elosztani ax-t
+	div dl ;ax -> [1|53]
+
+	push ax
+
+	mov dl, al ; kiíratjuk az 1-et
+	add dl, '0'
+	mov ah, 02h
+	int 21h
+
+	pop ax
+
+	mov al, ah ;\ ax értékét a maradékra állítjuk
+	xor ah, ah ;/
+
+	mov dl, 10
+	div dl ; ax -> [5|3]
+
+	;kiíratás
+	push ax
+	mov ah, 02h
+	mov dl, al
+	add dl, '0'
+	int 21h
+
+	pop ax
+	mov dl, ah
+	mov ah, 02h
+	add dl, '0'
+	int 21h
+
+	; működése:
+	; ax értéke 153
+	; ax/100 -> 1 | 53 maradék
+	; eredmény kiíratása
+	; maradék / 10 -> 5 | 3 maradék
+	; eredmény kiíratása
+	; maradék kiíratása
+
+	...
+
+================================================================================================================================
+
 ################################################################################################################################
 ################################################################################################################################
 ################################################################################################################################

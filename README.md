@@ -65,14 +65,14 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. szövegben lévő egyenelt megoldása
 1. egyéb műveletek
     1. paraméterek kezelése
-    1. bináris szám decimálissá alakítása !
+    1. bináris szám decimálissá alakítása
 1. grafikus műveletek
     1. grafikus módba váltás
     1. pixel rajzolása
     1. pixel színe
     1. vonalak húzása
     1. alakzatok kitöltése
-    1. grafikus módban billentyű leütések észlelése !
+    1. grafikus módban billentyű leütések észlelése
 1. függvények
 
 
