@@ -75,7 +75,7 @@ add:
 	Összeadás, olyan mint a '+='
 	add {MIHEZ}, {MIT}
 
-	add BL, 2 -> BL += 2
+	add bl, 2 -> bl += 2
 
 ################################################################################################################################
 
@@ -84,7 +84,7 @@ sub:
 	Kivonás, olyan mint a '-='
 	sub {MIBŐL}, {MIT}
 
-	sub BL, 2 -> BL -= 2
+	sub bl, 2 -> bl -= 2
 
 ################################################################################################################################
 
@@ -126,11 +126,11 @@ jmp:
 ================================================================================================================================
 		
 		...
-		jmp Fuggveny  --┐
-		...		|
-				|
-				|
-	Fuggveny:	<-------┘
+		jmp Fuggveny  ;--┐
+		...		;|
+				;|
+				;|
+	Fuggveny:	;<-------┘
 		;{MŰVELETEK}
 
 ================================================================================================================================
@@ -295,10 +295,10 @@ Példa:
 	...
 	
 	mov cx, 10 ;Számláló regiszter beállítása
-	mov AH, 02
+	mov ah, 02
 
 Kiirat:
-	mov DL, 'A'
+	mov dl, 'A'
 	int 21h
 
 	loop Kiirat
@@ -320,7 +320,8 @@ Pl:
 
 mov dx, offset uzenet ;ekkor a "dx" az "uzenet" címére fog mutatni
 
-;ekkor a "dx" értékét ha lekérjük akkor az a "v" lesz
+;ekkor a "dx" értékét ha lekérjük akkor az a "v"-re fog mutatni az uzenetben
+;Ezt az értéket a "[]" operátorral lehet lekérni. (3.13 - szögletes zárójel), ha csak magát a "dx"-et íratjuk ki akkor az adott memóriacímét fogkuk kiíratni.
 ;ha a "dx"-t incrementáljuk akkor már "a" lesz az értéke
 
 ...
@@ -363,9 +364,9 @@ Novel:
 
 ################################################################################################################################
 
-*3.13* - *kapcsos zárójel* - *[]*
+*3.13* - *szögletes zárójel* - *[]*
 
-Ezt akkor használjuk amikor egy regiszterben eltárolt pointer értékét szeretnénk használni módosítani.
+Akkor használható ha módosítani szeretnénk egy pointer azon értékét amelyre mutat.
 
 Pl:
 ================================================================================================================================
@@ -686,7 +687,7 @@ Különféle megjelenítéssel és adat bevitellel kapcsolatos utasítások.
 *5.1* - *képernyő törlés*
 Hasonló eredménye van mint a "Console.Clear()"-nek.
 
-!!! Ha utána akarunk kiíratni karaktert akkor újra meg kell hívni a "mov AH, 02"-t nem lehet úgy csinálni mint amikor több karaktert írunk ki egymás után !!!
+!!! Ha utána akarunk kiíratni karaktert akkor újra meg kell hívni a "mov ah, 02"-t nem lehet úgy csinálni mint amikor több karaktert írunk ki egymás után !!!
 
 ================================================================================================================================	
 
@@ -717,7 +718,7 @@ A beütött karaktert az "al" regiszter tárolja le!
 
 ================================================================================================================================
 
-xor ax,ax
+xor ax, ax
 int 16h
 
 ================================================================================================================================
@@ -729,8 +730,8 @@ Karakter kiíratása:
 
 ================================================================================================================================
 
-mov AH, 02
-mov DL, ;{KARAKTER KÓD}
+mov ah, 02
+mov dl, ;{KARAKTER KÓD}
 int 21h
 
 ================================================================================================================================
@@ -741,16 +742,16 @@ Pl.: '0' karakter megadása:
 '0' karakter kódja 48
 
 1, decimálisan megadva:
-	mov DL, 48
+	mov dl, 48
 
 2, hexadecimálisan:
-	mov DL, 30h
+	mov dl, 30h
 
 3, binárisan:
-	mov DL, 00110000b
+	mov dl, 00110000b
 
 4, karakter megadásával:
-	mov DL, '0'
+	mov dl, '0'
 
 
 Karakterek megadása műveletekkel:
@@ -759,11 +760,11 @@ Pl. '2' megadása:
 
 ================================================================================================================================
 
-mov BL, '0' ;megadjuk a '0'-t mint kezdő karakter
-add BL, 2 ;hozzáadjuk a kívánt számot
+mov bl, '0' ;megadjuk a '0'-t mint kezdő karakter
+add bl, 2 ;hozzáadjuk a kívánt számot
 
-mov ah, 02
-mov DL, BL ;2 kerül kiiratásra
+mov ah, 02h
+mov dl, bl ;2 kerül kiiratásra
 int 21h
 
 ================================================================================================================================
@@ -776,7 +777,7 @@ Szöveg kiíratása:
 ================================================================================================================================
 
 mov dx, offset uzenet
-mov ah, 09
+mov ah, 09h
 int 21h
 
 Program_Vége:
@@ -929,301 +930,6 @@ Eltelt időt 2 időpont különbségével tudjuk számolni
 	int 1ah
 
 	sub dx, bx ; "dx" regiszter eredménye az eltelt tickek száma
-
-================================================================================================================================
-
-################################################################################################################################
-################################################################################################################################
-################################################################################################################################
-
-*8* - *gyakori feladatok*
-
-ZH-k ban előforduló gyakori feladatok.
-
-################################################################################################################################
-
-*8.1* - *karakteres alakzat kirajzolása*
-
-Különböző alakzatok kirajzolása. Pl.: négyzet, háromszög, rombusz
-
-Oldalas kód részek határozzák meg hogy mennyi oldala van egy alakzatnak.
-A "cx" regiszterbe betöltött érték az oldal hosszát + 1 et jelenti.
-Minden oldalon a "dl", "dh" regiszter növelésével vagy csökkentésével lehet az oldal irányát állítani.
-
-┌----------------------------------┐
-| 		   -->		   |
-| 	inc dl => ######	   |
-| 				   |
-├----------------------------------┤
-| 		    <--		   |
-| 	dec dl => ######	   |
-| 				   |
-├----------------------------------┤
-| 		    |	#	   |
-| 	inc dh =>   |	#	   |
-| 		    V	#	   |
-├----------------------------------┤
-| 		    /\  #	   |
-| 	dec dh =>   |   #	   |
-| 		    |   #	   |
-├----------------------------------┤
-|	          #	\	   |
-| 	inc dh     #	 \	   |
-| 	inc dl =>   #	  \	   |
-| 		     #     V	   |
-├----------------------------------┤
-|		  #	/\	   |
-| 	dec dh     #	 \	   |
-| 	dec dl =>   #	  \	   |
-| 		     #     \	   |
-├----------------------------------┤
-|		     #  /	   |
-| 	inc dh      #  /	   |
-| 	dec dl =>  #  /		   |
-| 		  #  V		   |
-├----------------------------------┤
-|		     # /\	   |
-| 	dec dh      #  /   	   |
-| 	inc dl =>  #  /		   |
-|                 #  /		   |
-└----------------------------------┘
-
-
-
-Négyzet (5x5, [3,3] kezdőponttal):
-================================================================================================================================
-
-	mov dh, 3 ; y
-	mov dl, 3 ; x
-
-	mov cx, 4
-ElsoOldal:
-	mov ah, 02h
-	mov bh, 0
-	inc dl
-	int 10h
-
-	push dx
-
-	mov ah, 02h
-	mov dl, 'X'
-	int 21h
-	pop dx
-	loop ElsoOldal
-
-	mov cx, 4
-MasodikOldal:
-	mov ah, 02h
-	mov bh, 0
-	inc dh
-	int 10h
-	push dx
-	mov ah, 02h
-	mov dl, 'X'
-	int 21h
-	pop dx
-	loop MasodikOldal
-
-	mov cx, 4
-HarmadikOldal:
-	mov ah, 02h
-	mov bh, 0
-	dec dl
-	int 10h
-	push dx
-	mov ah, 02h
-	mov dl, 'X'
-	int 21h
-	pop dx
-	loop HarmadikOldal
-
-	mov cx, 4
-NegyedikOldal:
-	mov ah, 02h
-	mov bh, 0
-	dec dh
-	int 10h
-	push dx
-	mov ah, 02h
-	mov dl, 'X'
-	int 21h
-	pop dx
-	loop NegyedikOldal
-
-================================================================================================================================
-
-################################################################################################################################
-
-*8.2* - *karakter számolás egy szövegben*
-
-Egy adott stringben egy adatt karakter megszámolása, és kiíratása.
-
-"e"-betű megszámolása és kiíratása
-
-================================================================================================================================
-	
-	...
-	
-	mov bl, 0 ; számoló
-	mov di, offset uzenet
-Betuvizsgal:
-	mov dx, [di]
-	cmp dl, 'e'
-	jz Novel
-	cmp dl, 36
-	jz Kiir
-	inc di
-	jmp Betuvizsgal
-
-Novel:
-	inc di
-	inc bl
-	jmp Betuvizsgal
-
-Kiir:
-	mov ah, 02h
-	mov dl, bl
-	add dl, '0'
-	int 21h
-
-	...
-
-uzenet db "egy adott szoveg amiben meg kene szamolni a karaktereket$" ; 8-e
-
-
-================================================================================================================================
-
-################################################################################################################################
-
-*8.3* - *szöveg megfordítása*
-
-Egy adott stringben található szöveg megfordítása.
-
-================================================================================================================================
-
-	...
-
-	mov cx, 0
-	mov di, offset uzenet
-Szamolo:
-	mov dx, [di]
-	cmp dl, 36
-	jz Fordito
-	inc cx
-	inc di
-	jmp Szamolo
-
-Fordito:
-	mov di, offset uzenet
-	dec di
-	add di, cx
-	mov dl, [di]
-	mov ah, 02h
-	int 21h
-	loop Fordito
-
-	...
-
-uzenet db "valami amit meg kene forditani$"
-
-================================================================================================================================
-
-Szöveg megfordítása és visszarakása a stringbe.
-
-================================================================================================================================
-
-	...
-
-mov di, offset uzenet
-	mov cx, 0
-Kiiras:
-	xor dx, dx
-	mov dl, [di]
-	cmp dl, '$'
-	jz ForditElokeszit
-	mov ah, 02h
-	int 21h
-	inc di
-	inc cx
-	push dx
-	jmp Kiiras
-
-ForditElokeszit:
-	mov si, offset uzenet
-
-Fordit:
-	pop dx
-	mov [si], dl
-	inc si
-	loop Fordit
-
-Program_Vege:
-	inc si
-	mov dl, '$'
-	mov [si], dl
-	mov ah, 02h
-	mov dl, ' '
-	int 21h
-	mov dx, offset uzenet
-	mov ah, 09h
-	int 21h
-	mov ax, 4c00h
-	int 21h
-
-uzenet db "Cuccos$"
-
-	...
-
-================================================================================================================================
-
-
-################################################################################################################################
-
-7.4. szövegben lévő egyenelt megoldása*
-
-================================================================================================================================
-
-	...
-
-	mov di, offset uzenet  			;\
-	mov ax, [di]				;|
-						;|
-	sub ax, '0'				;|
-						;|
-	add di, 2				;|  Szövegből a két számjegy kiolvasása.
-	mov dx, [di]				;|
-	sub dx, '0'				;|
-						;|
-	mul dx					;|
-	push ax				   	;/
-
-	xor dx, dx				;Osztás előkészítése, eredmény itt lesz eltárolva
-	mov cl, 10				;A kapott eredményet elosztjuk 10 el, megkapjuk, hogy 10^1 szer mennyi az eredmény első tagja
-	div cx
-
-	mov ah, 02h				;\
-	add dl, '0'				;| Eredmény első tagjának kiiratása
-	int 21h					;/
-
-	sub dl, '0'
-
-	mov ax, dx				;\
-	mov dx, 10				; | Eredmény első tagját beszorozzuk 10 el, így csak az első tag * 10 lesz "ax"-ben
-							; |
-	mul dx					;/
-
-	mov cx, ax				;\
-	pop ax					; | Eredeti számolás eredményét a stackből kivesszük, majd kivonjuk belőle az előző részben megkapott számot
-	sub ax, cx				; |	Tehát: eredmény - (első tag * 10) = utolsó tag
-	mov dl, al				;/
-
-	mov ah, 02h				;\
-	add dl, '0'				; | Utolsó tag kiiratása
-	int 21h					;/
-
-	...
-
-uzenet db "8*8$"
 
 ================================================================================================================================
 
@@ -1428,8 +1134,8 @@ Képernyő törlése grafikus módban, is hasonló módon történik:
 	; y = 50
 	mov ax, 50 ;Y koordináta
 	mov bx, 320
-	mul bx ; Dx:AX = Y * 320
-	add ax, 20 ; x koordináta, AX = y*320+x
+	mul bx ; DX:AX = Y * 320
+	add ax, 20 ; x koordináta, ax = y*320+x
 	mov di, ax
 
 	mov al, 129 ; szín 129-es a palettából
@@ -1490,16 +1196,16 @@ le:
 	add di, 320
 
 45°:
-balról jobbra felfelé:
+balról jobbra, felfelé:
 	sub di, 319
 
-jobbról balra felfelé:
+jobbról balra, felfelé:
 	sub di, 321
 
-balról jobbra lefelé:
+balról jobbra, lefelé:
 	add di, 321
 
-jobbról balra lefelé:
+jobbról balra, lefelé:
 	add di, 319
 
 ################################################################################################################################

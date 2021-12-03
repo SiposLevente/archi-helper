@@ -36,7 +36,7 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
     1. többi jump
     1. loop
     1. offset
-    1. kapcsos zárójel - []
+    1. szögletes zárójel - []
     1. push/pop
     1. mul
     1. div
@@ -58,11 +58,6 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
 1. számlálás
     1. óra beolvasása
     1. eltelt idő számítása
-1. gyakori feladatok
-    1. karakteres alakzat kirajzolása
-    1. karakter számolás egy szövegben
-    1. szöveg megfordítása
-    1. szövegben lévő egyenelt megoldása
 1. egyéb műveletek
     1. paraméterek kezelése
     1. bináris szám decimálissá alakítása
