@@ -1,6 +1,6 @@
 ![assembly-show](images/assembly-show.png)
 # Archi Helper
-Fontosabb assembly(masm) utasítások és Dosbox környezet megfelelő beállítása.
+Fontosabb assembly(8086 processzorhoz) utasítások és Dosbox környezet megfelelő beállítása.
 
 ## Jelek értelmezése az "ArchiHelper.txt" állományban:
 
