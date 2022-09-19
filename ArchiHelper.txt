@@ -14,8 +14,8 @@ C:\> link.exe program.obj,,,,
 
 *2* - *program váz*
 Alap program váz (utána egy üres sor!!):
-!!! A program részek amiknek ':' van a végén azok autómatikusan lefutnak még ha nem is ugranak bele!!!
-!!! Ha azt szeretnénk hogy egy elágazás után vége legyen a programnak akkor meg kell hívni a "jmp Program_Vege" utasítást!!!
+!!! A program részek, amiknek ':' van a végén azok automatikusan lefutnak még ha nem is ugranak bele!!!
+!!! Ha azt szeretnénk, hogy egy elágazás után vége legyen a programnak akkor meg kell hívni a "jmp Program_Vege" utasítást!!!
 ================================================================================================================================
 
 Code	Segment
@@ -72,7 +72,7 @@ mov:
 
 *3.2* - *add*
 add:
-	Összeadás, olyan mint a '+='
+	Összeadás, olyan, mint a '+='
 	add {MIHEZ}, {MIT}
 
 	add bl, 2 -> bl += 2
@@ -81,7 +81,7 @@ add:
 
 *3.3* - *sub*
 sub:
-	Kivonás, olyan mint a '-='
+	Kivonás, olyan, mint a '-='
 	sub {MIBŐL}, {MIT}
 
 	sub bl, 2 -> bl -= 2
@@ -96,9 +96,9 @@ cmp:
 	Flagek:
 		C: Carry - 1-re áll, ha az aritmetikai művelet során átvitel vagy áthozat keletkezik, bitléptető és forgató utasítások során is használatba kerül
 
-		P: Parity - 0 az értéke ha páros, 1 ha páratlan
+		P: Parity - 0 az értéke, ha páros, 1 ha páratlan
 
-		Z: Zero - 1 az értéke ha az eredmény 0
+		Z: Zero - 1 az értéke, ha az eredmény 0
 
 		S: Sign - negatív eredmény esetén 1 az értéke
 
@@ -150,7 +150,7 @@ jmp:
 
 *3.6* - *jz*
 jz:
-	Feltételes ugrás, akkor ugrik ha a "zero" flag 1
+	Feltételes ugrás, akkor ugrik, ha a "zero" flag 1
 
 	Megfelel az "==" vel
 
@@ -180,7 +180,7 @@ Egyenlo:
 
 *3.7* - *jnz*
 jnz:
-	Feltételes ugrás, akkor ugrik ha a "zero" flag 0
+	Feltételes ugrás, akkor ugrik, ha a "zero" flag 0
 
 	Megfelel az "!=" vel
 
@@ -201,7 +201,7 @@ NemEgyenlo:
 
 *3.8* - *jc*
 jc:
-	Feltétel ugrás, akkor ugrik ha a "carry" flag 1
+	Feltétel ugrás, akkor ugrik, ha a "carry" flag 1
 	Pl.:
 
 ================================================================================================================================
@@ -222,7 +222,7 @@ VanCarry:
 
 *3.9* - *jnc*
 jnc:
-	Feltétel ugrás, akkor ugrik ha a "carry" flag 0
+	Feltétel ugrás, akkor ugrik, ha a "carry" flag 0
 	Pl.:
 ================================================================================================================================
 
@@ -245,7 +245,7 @@ NincsCarry:
 stb... többi ugrás is hasonlóan működik csak más feltétellel rendelkeznek
 Több kondícionális ugrásra példa és azok negáltjai:
 
-JE/JNE = Equal, ez kb ugyan az mint a JZ/JNZ
+JE/JNE = Equal, ez kb ugyan az, mint a JZ/JNZ
 JO/JNO = Overflow
 JS/JNS = Signed
 JP/JNP, JPE/JPO = Parity, even(páros)/odd(páratlan). JP/JNP, JPE/JPO pár ugyan azt jelenti
@@ -254,11 +254,11 @@ JP/JNP, JPE/JPO = Parity, even(páros)/odd(páratlan). JP/JNP, JPE/JPO pár ugya
 
 *3.11* - *loop*
 
-Ciklusok megvalósításához használható, hasonló mint a JMP utasítással létrehozott loop.
-Különbség a kettő között az hogy ha "loop" utasítást használunk akkor meg tudjuk könnyedén adni hogy hányszor fusson le a ciklus.
+Ciklusok megvalósításához használható, hasonló, mint a JMP utasítással létrehozott loop.
+Különbség a kettő között az, hogy ha "loop" utasítást használunk akkor meg tudjuk könnyedén adni, hogy hányszor fusson le a ciklus.
 Ciklus lefutásának a számát a "cx" regiszterben található érték befolyásolja. Minden egyes ciklus lefutás után ebből a regiszterből levonódik egy és ha ez eléri a 0-t akkor kilép a ciklusból.
 
-Hasonló mint C nyelvben a következő:
+Hasonló, mint C nyelvben a következő:
 A példában a "cx" regisztert a counter reprezentálja.
 
 ================================================================================================================================
@@ -330,7 +330,7 @@ uzenet db "valami$"
 
 ================================================================================================================================
 
-Használható szövegek bejárására is. Például olyan feladatokhoz hogy egy adott szövegben mennyi "x" betű van.
+Használható szövegek bejárására is. Például olyan feladatokhoz, hogy egy adott szövegben mennyi "x" betű van.
 
 ================================================================================================================================
 
@@ -366,7 +366,7 @@ Novel:
 
 *3.13* - *szögletes zárójel* - *[]*
 
-Akkor használható ha módosítani szeretnénk egy pointer azon értékét amelyre mutat.
+Akkor használható, ha módosítani szeretnénk egy pointer azon értékét amelyre mutat.
 
 Pl:
 ================================================================================================================================
@@ -389,7 +389,7 @@ Ebben az esetben a 10 az "ax" regiszterbe kerül.
 
 2, mov [ax], 10
 
-Ebben az esetben a 10 oda kerül ahova az "ax" pointer mutat. Itt az "ax" csak egy mutató egy cím felé.
+Ebben az esetben a 10 oda kerül, ahova az "ax" pointer mutat. Itt az "ax" csak egy mutató egy cím felé.
 
 ################################################################################################################################
 
@@ -397,7 +397,7 @@ Ebben az esetben a 10 oda kerül ahova az "ax" pointer mutat. Itt az "ax" csak e
 
 Ezzel a két művelettel lehet regiszterek értékét a verembe(stack)-be mozgatni, illetve kiszedni azokat onnan egy megadott regiszterbe.
 
-!!! A verembe mozgatott érték regiszterének az értéke nem fog változtni mozgatás után !!!
+!!! A verembe mozgatott érték regiszterének az értéke nem fog változni mozgatás után !!!
 !!! A verembe csakis teljes regisztereket lehet mozgatni, nem lehet külön az "xl" vagy a "xh" regisztereket
 !!! A verem LIFO elven működik, ez azt jelenti hogy azt pop oljuk amit utoljára pusholtunk !!!
 !!! Ha pop olunk akkor a popolt érték felülírja a megadott regiszter tartalmát !!!
@@ -411,15 +411,15 @@ Pl.:
 	push dx
 
 	mov ah, 02h
-	int 21h			; "dl" értéke még mindig 1 annak ellenére hogy a verembe mozgattuk az értékét
+	int 21h			; "dl" értéke még mindig 1 annak ellenére, hogy a verembe mozgattuk az értékét
 					; veremben eltároltuk a "dx" értékét
 	...
 
 ================================================================================================================================
 
-Akkor hasznos ha pl. valamilyen utasítást akarunk elvégezni de a számunkra fontos eredmény értéke abban a regiszterben található ahová az utasítás paramétereit kell mozgatni.
+Akkor hasznos, ha pl. valamilyen utasítást akarunk elvégezni, de a számunkra fontos eredmény értéke abban a regiszterben található ahová az utasítás paramétereit kell mozgatni.
 
-Pl.: Szorzás eredményét, és egy másik regiszter eredményét el szeretnénk tárolni, úgy hogy a kiiratásuk között egy másik karaktert is ki szeretnénk iratni.
+Pl.: Szorzás eredményét, és egy másik regiszter eredményét el szeretnénk tárolni, úgy, hogy a kiíratásuk között egy másik karaktert is ki szeretnénk íratni.
 ================================================================================================================================
 
 	mov ax, 2
@@ -451,7 +451,7 @@ Pl.: Szorzás eredményét, és egy másik regiszter eredményét el szeretnénk
 
 Szorzás. 2 regiszter értékét összeszorozza.
 
-!!! Ha 2 16-bites szám szorzása az alábbi példa alapján nagyobb számot eredményezne akkor a szám also 16 bitje az "ax" regiszterben lesz megtalálható a felső része a "dx" regiszterben
+!!! Ha 2 16-bites szám szorzása az alábbi példa alapján nagyobb számot eredményezne akkor a szám alsó 16 bitje az "ax" regiszterben lesz megtalálható a felső része a "dx" regiszterben
 
 16-bites számok szorzása:
 ================================================================================================================================
@@ -516,7 +516,7 @@ Bináris műveletek:
 
 *4.1* - *and*
 and:
-	Logikai "és" művelet, olyan mint az "&="
+	Logikai "és" művelet, olyan, mint az "&="
 	and {MIT}, {MIVEL}
 
 	Pl.:
@@ -536,7 +536,7 @@ and:
 
 *4.2* - *or*
 or:
-	Logikai "vagy" művelet, olyan mint az "|="
+	Logikai "vagy" művelet, olyan, mint az "|="
 	or {MIT}, {MIVEL}
 
 	Pl.:
@@ -556,7 +556,7 @@ or:
 
 *4.3* - *xor*
 xor:
-	Logikai "kizáró vagy" művelet, olyan mint az "^="
+	Logikai "kizáró vagy" művelet, olyan, mint az "^="
 	xor {MIT}, {MIVEL}
 
 	Pl.:
@@ -575,11 +575,11 @@ xor:
 
 ################################################################################################################################
 
-Léptetéseknél ha 1 nél nagyobb számmal szeretnénk léptetni akkor a léptetés méretét a "cl"-regiszterbe kell írni
+Léptetéseknél, ha 1-nél nagyobb számmal szeretnénk léptetni akkor a léptetés méretét a "cl"-regiszterbe kell írni
 
 *4.4* - *shl*
 shl:
-	Bitléptetés balra, olyan mint az "<<=" 
+	Bitléptetés balra, olyan, mint az "<<=" 
 
 	shl {MIT}, {MENNYIVEL}
 
@@ -610,7 +610,7 @@ shl:
 
 *4.5* - *shr*
 shr:
-	Bitléptetés jobbra, olyan mint az ">>=" 
+	Bitléptetés jobbra, olyan, mint az ">>=" 
 
 	shr {MIT}, {MENNYIVEL}
 
@@ -685,7 +685,7 @@ Különféle megjelenítéssel és adat bevitellel kapcsolatos utasítások.
 ################################################################################################################################
 
 *5.1* - *képernyő törlés*
-Hasonló eredménye van mint a "Console.Clear()"-nek.
+Hasonló eredménye van, mint a "Console.Clear()"-nek.
 
 !!! Ha utána akarunk kiíratni karaktert akkor újra meg kell hívni a "mov ah, 02"-t nem lehet úgy csinálni mint amikor több karaktert írunk ki egymás után !!!
 
@@ -699,14 +699,14 @@ int 10h
 ################################################################################################################################
 
 *5.2* - *kurzor pozícionálása*
-Hasonló mint a "Console.SetCursorPosition(x, y)"
+Hasonló, mint a "Console.SetCursorPosition(x, y)"
 
 ================================================================================================================================
 
 mov ah, 02h
 mov bh, 0
-mov dh, ;{SOR SZÁMA} ;Hanyadik sorba írodjon ki a karakter
-mov dl, ;{OSZLOP SZÁMA} ; Hanyadik oszlopba írodjon ki a karakter
+mov dh, ;{SOR SZÁMA} ;Hanyadik sorba íródjon ki a karakter
+mov dl, ;{OSZLOP SZÁMA} ; Hanyadik oszlopba íródjon ki a karakter
 int 10h
 
 ================================================================================================================================
@@ -736,7 +736,7 @@ int 21h
 
 ================================================================================================================================
 
-Karakter kódók a következők lehetnek:
+Karakter kódok a következők lehetnek:
 ASCII kódok alapján kell megadni a karaktereket.
 Pl.: '0' karakter megadása:
 '0' karakter kódja 48
@@ -764,7 +764,7 @@ mov bl, '0' ;megadjuk a '0'-t mint kezdő karakter
 add bl, 2 ;hozzáadjuk a kívánt számot
 
 mov ah, 02h
-mov dl, bl ;2 kerül kiiratásra
+mov dl, bl ;2 kerül kiíratásra
 int 21h
 
 ================================================================================================================================
@@ -794,8 +794,8 @@ uzenet db "Ez egy uzenet!$"
 
 *5.6* - *karakterre várás program feltartása nélkül*
 
-Ebben a módban a program úgy képes bekérni karaktereket a felhasználótól hogy közben bármi egyebet is tud csinálni.
-Pl: karakterek folyamatos kiíráas úgy hogy a kíírt karaktert anélkül tudjuk megadni hogy a program a karakterek kiírását abbahagyja
+Ebben a módban a program úgy képes bekérni karaktereket a felhasználótól, hogy közben bármi egyebet is tud csinálni.
+Pl: karakterek folyamatos kiíratás úgy, hogy a kiírt karaktert anélkül tudjuk megadni hogy a program a karakterek kiírását abbahagyja
 
 ================================================================================================================================
 
@@ -805,7 +805,7 @@ Ciklus:
 	mov dl, cl			; | Elmentett karakter kiíratása
 	int 21h				;/
 	mov ah, 01h			;\
-	int 16h				; | Vizsgálja hogy a key bufferben vannak e karakterek, ha igen a zero flag 1 re áll
+	int 16h				; | Vizsgálja, hogy a key bufferben vannak e karakterek, ha igen a zero flag 1 re áll
 	jnz KarakterMent	;/
 	jmp Ciklus
 
@@ -829,7 +829,7 @@ KarakterMent:
 Egy "db"-ben eltárolt karakter növelése.
 Pl.: ha egy szöveg a következő "0$" ha ezt megnöveljük akkor "1$" lesz
 
-Ha egy szövegen belül több karakter van akkor mindig a legelső(a legbalrább) lévő karakter fog növekedni, kivéve ha a "di értékét módosítjuk.
+Ha egy szövegen belül több karakter van akkor mindig a legelső (a legbalrább) lévő karakter fog növekedni, kivéve ha a "di értékét módosítjuk.
 
 ================================================================================================================================
 
@@ -943,9 +943,9 @@ Eltelt időt 2 időpont különbségével tudjuk számolni
 
 *8.1* - *paraméterek kezelése*
 
-Paraméterek azok a dolgok amelyek program elindítása után a futtatható tartomány után írunk.
+Paraméterek azok a dolgok, amelyek program elindítása után a futtatható tartomány után írunk.
 
-!!! Figyelni kell hogy a "start" részébe a programnak "mov	di, 81h"-t kell írni. majd ha végeztünk a paraméter vizsgálattal vissza kell ezt állítani az alapértelmezettre. !!!
+!!! Figyelni kell, hogy a "start" részébe a programnak "mov	di, 81h"-t kell írni. majd ha végeztünk a paraméter vizsgálattal vissza kell ezt állítani az alapértelmezettre. !!!
 
 Pl:
 ================================================================================================================================
@@ -955,7 +955,7 @@ program.exe {VALAMILYEN PARAMÉTER}
 ================================================================================================================================
 
 A beolvasott paraméterek a "di" regiszterben tárolódnak el.
-A ennek a karaktersorozatnak az utolsó karaktere egy "0Dh", ezt lehet arra használni hogy kiderítsük hogy a beovlasott paraméterek végére értünk-e.
+A ennek a karaktersorozatnak az utolsó karaktere egy "0Dh", ezt lehet arra használni hogy kiderítsük hogy a beolvasott paraméterek végére értünk-e.
 
 Paraméterek vizsgálata, pl: '/' jel után megadott karakter kiolvasása:
 ================================================================================================================================
@@ -1019,7 +1019,7 @@ Pl:
 	
 	...
 	
-	mov ax, 153 ; alap értéked amit ki szeretnénk iratni
+	mov ax, 153 ; alap értéked amit ki szeretnénk íratni
 	mov dl, 100 ; 100-al fogjuk elosztani ax-t
 	div dl ;ax -> [1|53]
 
@@ -1072,7 +1072,7 @@ Pl:
 Grafikus módban a munkaterünk 320x200-as. Az indexelés a bal felső saroktól kezdődik, ennek az értéke [0;0], első sor utolsó értéke 319.
 Az egyes pixelek helye, színe az ES:DI regiszterekben vannak eltárolva.
 256 különböző szín lehetséges.
-A pixelek értékei folyamatosan vannak eltárolval, ez azt jelenti hogy a 320. érték a második sor első pixelét jelenti már.
+A pixelek értékei folyamatosan vannak eltárolva, ez azt jelenti, hogy a 320. érték a második sor első pixelét jelenti már.
 
 Kezdő pixel értékét így lehet megadni: y*320+x
 
@@ -1343,7 +1343,7 @@ Program_Vege:
 
 *9.6* *grafikus módban billentyű leütések észlelése*
 
-Pontosan ugyan úgy történik mint karakteres módban, viszont figyelni kell rá hogy egyes karakterek észeléséhez azoknak a "scancode"-ját kell használnunk, ezek is ugyan úgy megtalálhatóak a helper programban.
+Pontosan ugyan úgy történik, mint karakteres módban, viszont figyelni kell rá, hogy egyes karakterek észleléséhez azoknak a "scancode"-ját kell használnunk, ezek is ugyan úgy megtalálhatóak a helper programban.
 
 ################################################################################################################################
 ################################################################################################################################
@@ -1351,7 +1351,7 @@ Pontosan ugyan úgy történik mint karakteres módban, viszont figyelni kell r�
 
 *10* *függvények*
 
-Hasonlóak mint a ":"-al ellátott kódrészek, viszont itt vissza is ugrunk oda ahol eddig a kód tartott.
+Hasonlóak, mint a ":"-al ellátott kódrészek, viszont itt vissza is ugrunk oda, ahol eddig a kód tartott.
 Értékeket átadni, regiszterek segítségével lehet legegyszerűbben.
 
 Függvény meghívása, és deklarálása:
@@ -1360,7 +1360,7 @@ Függvény meghívása, és deklarálása:
 	...
 
 	call Fuggveny
-	;következő utasítás ami a föggvény lefutása után fog lefutni. A program halad tovább innentől.
+	;következő utasítás ami a függvény lefutása után fog lefutni. A program halad tovább innentől.
 	...
 
 ;ad az "ax"-regiszterhez 2-t, majd kiírja az értékét
