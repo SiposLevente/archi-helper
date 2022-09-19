@@ -16,9 +16,9 @@ Fontosabb assembly(8086 processzorhoz) utasítások és Dosbox környezet megfel
 
 ## Témák gyors elérése:
 ### Használata:
-Az "ArchiHelper.txt" állományban keressünk rá az adott számú elem számára vagy nevére. **Ha egy nagyobb téma van akkor a téma elején lehetnek összefoglaló információk amik az egész témára és azok alrészeire is vonatkoznak**
+Az "ArchiHelper.txt" állományban keressünk rá az adott számú elem számára vagy nevére. **Ha egy nagyobb téma van akkor a téma elején lehetnek összefoglaló információk, amik az egész témára és azok alrészeire is vonatkoznak**
 
-Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza: 
+Pl.: Kíváncsiak vagyunk, hogy hogyan néz ki a program váza: 
     keresés szövege: "\*2\*" vagy "\*program váz\*" vagy "\*2\* - \*program váz\*"
 
 1. exe létrehozása
@@ -75,7 +75,7 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
 
 ### Programok futtatása
 
-1. Hozzunk létre egy mappát a számítógépünkön amiben majd a programunkat fogjuk elkészíteni, ebben a mappában előnyös ha benne van a **masm.exe** és a **link.exe**.
+1. Hozzunk létre egy mappát a számítógépünkön, amiben majd a programunkat fogjuk elkészíteni, ebben a mappában előnyös, ha benne van a **masm.exe** és a **link.exe**.
 1. Hozzunk létre egy programot **.asm** kiterjesztéssel a mappában.
 1. Nyissuk meg a Dosboxot.
 1. írjuk be a következőt: **<code>mount c {mappánk elérési utvonala}</code>**
@@ -86,15 +86,15 @@ Pl.: Kíváncsiak vagyunk hogy hogyan néz ki a program váza:
 
 A megosztott mappában tudunk tovább dolgozni, **Fájlok módosítása esetén nem kell újra felcsatolni viszont, ha új fájlt hozunk létre akkor kell csak újra felcsatolni mount-al**!
 
-### Könyvtárak autómatikus csatolása
+### Könyvtárak automatikus csatolása
 
 1. Keressük meg a **dosbox.conf** fájlunkat (Windows: **<code>{MEGHAJTÓ}:\Users\{FELHASZNÁLÓNÉV}\AppData\Local\DOSBox\dosbox-{VERZIÓSZÁM}.conf</code>**, Linux: **<code>~/.dosbox/</code>**:, Mac OS X: **<code>~/Library/Preferences/DOSBox {VERZIÓSZÁM} Preferences/</code>**)
-1. Végére írjuk a következőt: Több mappa autómatikus felcsatolása esetén többször egymás után írjuk a következő sort a megfelelő módosításokkal:**<code>mount c {VALAMILYEN MAPPA AMIT FEL SZERETNÉNK CSATOLNI}</code>** **!!! Több mappa esetén ügyeljünk a meghajtók betűjelére !!!**
-1. (OPCIONÁLIS) Ha szeretnénk akkor autómatikusan a felcsatolt meghajtóba válthatunk: **<code>c:</code>**
+1. Végére írjuk a következőt: Több mappa automatikus felcsatolása esetén többször egymás után írjuk a következő sort a megfelelő módosításokkal:**<code>mount c {VALAMILYEN MAPPA AMIT FEL SZERETNÉNK CSATOLNI}</code>** **!!! Több mappa esetén ügyeljünk a meghajtók betűjelére !!!**
+1. (OPCIONÁLIS) Ha szeretnénk akkor automatikusan a felcsatolt meghajtóba válthatunk: **<code>c:</code>**
 
 ## Grafikus módban a színek:
 
-A paletta a bal felső saroktól kezdődik, és jobbra haladva egyessével növekedik. Ha egy sornak vége akkor a következő sor elejéről folytatódik tovább a számozás.
+A paletta a bal felső saroktól kezdődik, és jobbra haladva egyesével növekedik. Ha egy sornak vége akkor a következő sor elejéről folytatódik tovább a számozás.
 
-A sorok számozása 16-al növekszik. Első sor 0-val kezdődik, 1.sor első elem kódja 16.
+A sorok számozása 16-tal növekszik. Első sor 0-val kezdődik, 1.sor első elem kódja 16.
 ![color-pallet](images/color-pallet.png)
